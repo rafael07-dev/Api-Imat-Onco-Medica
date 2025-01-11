@@ -101,6 +101,25 @@ public class MaintenanceScheduleService {
         return maintenanceScheduleMapper.toMaintenanceScheduleDTO(maintenanceScheduleSaved.orElse(null));
     }
 
+    public MaintenanceScheduleDTO updateSchedule(MaintenanceScheduleDTO dto, Integer id) {
+        MaintenanceSchedule maintenanceScheduleSaved = maintenanceScheduleRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Maintenance schedule not found"));
+
+        List<MonthlyMaintenance> monthlyMaintenanceSaved = maintenanceScheduleSaved.getMonthlyMaintenances();
+
+        for (MonthlyMaintenance monthlyMaintenance: monthlyMaintenanceSaved){
+            for (MonthlyMaintenanceDTO monthlyMaintenanceDTO: dto.getMonthlyMaintenances()){
+                if (monthlyMaintenance.getMonth().equalsIgnoreCase(monthlyMaintenanceDTO.getMonth())){
+                    monthlyMaintenance.setMaintenanceType(monthlyMaintenanceDTO.getMaintenanceType());
+
+                    maintenanceScheduleRepository.save(maintenanceScheduleSaved);
+                }
+            }
+        }
+
+        return maintenanceScheduleMapper.toMaintenanceScheduleDTO(maintenanceScheduleSaved);
+    }
+
     private static Map<String, Object> getEquipmentDataFromMaintenanceSchedule(MaintenanceSchedule schedule) {
         Map<String, Object> equipmentData = new HashMap<>();
         equipmentData.put("id", schedule.getEquipment().getId());

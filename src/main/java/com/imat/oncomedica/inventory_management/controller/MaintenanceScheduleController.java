@@ -29,9 +29,9 @@ public class MaintenanceScheduleController {
                 .body(maintenanceScheduleService.addSchedule(maintenanceScheduleDTO));
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<MaintenanceScheduleDTO> update(@RequestBody MaintenanceScheduleDTO maintenanceScheduleDTO, @PathVariable Integer id) {
-        return null;
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<MaintenanceScheduleDTO> update(@RequestBody MaintenanceScheduleDTO dto, @PathVariable Integer id) {
+        return ResponseEntity.ok(maintenanceScheduleService.updateSchedule(dto, id));
     }
 
     @DeleteMapping("/delete/{id}")
