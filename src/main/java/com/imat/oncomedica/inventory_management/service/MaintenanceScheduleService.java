@@ -91,6 +91,23 @@ public class MaintenanceScheduleService {
                 }).toList();
     }
 
+    public List<Map<String, Object>> findOneSchedule(Integer id) {
+        var maintenanceSchedules = maintenanceScheduleRepository.findById(id);
+
+        return maintenanceSchedules.stream()
+                .map(schedule -> {
+                    Map<String, Object> data = new HashMap<>();
+
+                    Map<String, Object> equipmentData = getEquipmentDataFromMaintenanceSchedule(schedule);
+                    List<Map<String, Object>> maintenances = getMaintenanceDataFromMaintenanceSchedule(schedule);
+
+                    data.put("id", schedule.getId());
+                    data.put("equipment", equipmentData);
+                    data.put("maintenances", maintenances);
+                    return data;
+                }).toList();
+    }
+
     public MaintenanceScheduleDTO deleteSchedule(Integer id) {
 
         Optional<MaintenanceSchedule> maintenanceScheduleSaved = Optional.ofNullable(maintenanceScheduleRepository.findById(id)

@@ -18,9 +18,14 @@ public class MaintenanceScheduleController {
         this.maintenanceScheduleService = maintenanceScheduleService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<Map<String, Object>>> getAllMaintenanceSchedules() {
         return ResponseEntity.ok().body(maintenanceScheduleService.findAllSchedules());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Map<String, Object>>> getAllMaintenanceSchedules(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(maintenanceScheduleService.findOneSchedule(id));
     }
 
     @PostMapping("/create")
