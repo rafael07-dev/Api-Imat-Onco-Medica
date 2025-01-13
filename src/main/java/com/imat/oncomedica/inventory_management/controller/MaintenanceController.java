@@ -1,5 +1,6 @@
 package com.imat.oncomedica.inventory_management.controller;
 
+import com.imat.oncomedica.inventory_management.Models.Maintenance;
 import com.imat.oncomedica.inventory_management.dto.MaintenanceDTO;
 import com.imat.oncomedica.inventory_management.service.MaintenanceService;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,15 @@ public class MaintenanceController {
     @GetMapping("/")
     public ResponseEntity<List<MaintenanceDTO>> findAll(){
         return ResponseEntity.ok().body(maintenanceService.findAll());
+    }
+
+    @GetMapping("/equipment/{equipmentId}")
+    public ResponseEntity<List<Maintenance>> getMaintenancesByEquipmentId(@PathVariable Integer equipmentId) {
+        List<Maintenance> maintenances = maintenanceService.getMaintenancesByEquipmentId(equipmentId);
+        if (maintenances.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(maintenances);
     }
 
     @PostMapping("/create")

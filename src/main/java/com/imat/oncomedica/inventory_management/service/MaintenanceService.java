@@ -63,4 +63,8 @@ public class MaintenanceService {
 
         return maintenanceMapper.toMaintenanceDtoList(maintenances);
     }
+
+    public List<Maintenance> getMaintenancesByEquipmentId(Integer equipmentId) {
+        return maintenanceRepository.findByEquipmentId(equipmentId);
+    }
 }
