@@ -17,23 +17,33 @@ public class Maintenance {
     @JoinColumn(name = "equipment_id")
     private Equipment equipment;
 
+    private String inventoryCode;
+
     @ManyToOne
     @JoinColumn(name = "staff_id")
     private MaintenanceStaff maintenanceStaff;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "maintenance_schedule_id")
-    private MaintenanceSchedule maintenanceSchedules;
+    private String name;
+
+    private String lastName;
 
     @Temporal(TemporalType.DATE)
     private Date scheduledDate;
+
+    private Date startDate;
+
+    private Date startTime;
+
+    private Date deliveryDate;
+
+    private Date timeUsed;
+
+    private Date registrationDate;
 
     @Temporal(TemporalType.DATE)
     private Date dateOfCompletion;
 
     private String type;
-
-    private Date timeUsed;
 
     private String observations;
 

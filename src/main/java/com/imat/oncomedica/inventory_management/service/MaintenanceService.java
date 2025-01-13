@@ -27,7 +27,7 @@ public class MaintenanceService {
     }
 
     public MaintenanceDTO save(MaintenanceDTO maintenance){
-        var newMaintenance = new Maintenance();
+        Maintenance newMaintenance = new Maintenance();
         var equipmentId = maintenance.getEquipmentId();
         var maintenanceStaffId = maintenance.getMaintenanceStaffId();
 
@@ -38,8 +38,16 @@ public class MaintenanceService {
                         .orElseThrow(() -> new RuntimeException("Maintenance staff not found"));
 
         newMaintenance.setEquipment(equipment);
+        newMaintenance.setInventoryCode(equipment.getInventoryCode());
         newMaintenance.setMaintenanceStaff(maintenanceStaff);
+        newMaintenance.setName(maintenanceStaff.getFirstName());
+        newMaintenance.setLastName(maintenanceStaff.getLastName());
         newMaintenance.setScheduledDate(maintenance.getScheduledDate());
+        newMaintenance.setStartDate(maintenance.getStartDate());
+        newMaintenance.setStartTime(maintenance.getStartTime());
+        newMaintenance.setDeliveryDate(maintenance.getDeliveryDate());
+        newMaintenance.setTimeUsed(maintenance.getTimeUsed());
+        newMaintenance.setRegistrationDate(maintenance.getRegistrationDate());
         newMaintenance.setDateOfCompletion(maintenance.getDateOfCompletion());
         newMaintenance.setType(maintenance.getType());
         newMaintenance.setObservations(maintenance.getObservations());
@@ -49,7 +57,10 @@ public class MaintenanceService {
         return maintenanceMapper.toMaintenanceDTO(maintenanceSaved);
     }
 
-    public List<Maintenance> findAll(){
-        return maintenanceRepository.findAll();
+    public List<MaintenanceDTO> findAll(){
+
+        List<Maintenance> maintenances = maintenanceRepository.findAll();
+
+        return maintenanceMapper.toMaintenanceDtoList(maintenances);
     }
 }

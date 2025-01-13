@@ -14,7 +14,14 @@ public class MaintenanceDTO {
     private Long id;
     private Integer equipmentId;
     private Integer maintenanceStaffId;
+    private String name;
+    private String lastName;
     private Date scheduledDate;
+    private Date startDate;
+    private Date startTime;
+    private Date deliveryDate;
+    private Date timeUsed;
+    private Date registrationDate;
     private Date dateOfCompletion;
     private String type;
     private String observations;
