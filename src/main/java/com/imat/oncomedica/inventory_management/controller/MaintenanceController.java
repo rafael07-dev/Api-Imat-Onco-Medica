@@ -32,6 +32,15 @@ public class MaintenanceController {
         return ResponseEntity.ok(maintenances);
     }
 
+    @GetMapping("/{maintenanceStaffId}")
+    public ResponseEntity<List<Maintenance>> getMaintenancesByMaintenanceStaffId(@PathVariable Integer maintenanceStaffId) {
+        List<Maintenance> maintenances = maintenanceService.getMaintenancesByMaintenanceStaffId(maintenanceStaffId);
+        if (maintenances.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(maintenances);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<MaintenanceDTO> save(@RequestBody MaintenanceDTO maintenance){
         return ResponseEntity.created(URI.create("/api/maintenances/" + maintenance.getId()))

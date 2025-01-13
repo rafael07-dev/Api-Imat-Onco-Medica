@@ -9,4 +9,5 @@ import java.util.List;
 public interface MaintenanceRepository extends JpaRepository<Maintenance, Integer> {
 
     List<Maintenance> findByEquipmentId(Integer equipmentId);
+    List<Maintenance> findByMaintenanceStaffId(Integer maintenanceStaffId);
 }

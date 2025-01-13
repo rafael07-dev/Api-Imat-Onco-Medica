@@ -67,4 +67,8 @@ public class MaintenanceService {
     public List<Maintenance> getMaintenancesByEquipmentId(Integer equipmentId) {
         return maintenanceRepository.findByEquipmentId(equipmentId);
     }
+
+    public List<Maintenance> getMaintenancesByMaintenanceStaffId(Integer maintenanceStaffId) {
+        return maintenanceRepository.findByEquipmentId(maintenanceStaffId);
+    }
 }
