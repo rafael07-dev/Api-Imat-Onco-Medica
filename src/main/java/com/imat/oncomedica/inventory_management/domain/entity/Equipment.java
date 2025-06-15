@@ -28,8 +28,12 @@ public class Equipment implements Serializable {
     private String location;
     private String area;
     private String frequency;
-    private String floor;         // Piso
+    private String floor;
     private String tower;
+
+    @OneToMany(mappedBy = "equipment")
+    @JsonIgnore
+    private List<Maintenance> maintenances;
 
     @OneToMany(mappedBy = "equipment")
     @JsonIgnore
