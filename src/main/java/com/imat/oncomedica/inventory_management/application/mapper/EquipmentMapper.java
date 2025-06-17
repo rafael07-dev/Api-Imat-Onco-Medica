@@ -14,6 +14,7 @@ public interface EquipmentMapper {
         return new Equipment(
                 null,
                 equipment.getEquipmentName(),
+                null,
                 equipment.getType(),
                 equipment.getInventoryCode(),
                 equipment.getBrand(),
@@ -32,6 +33,7 @@ public interface EquipmentMapper {
         return new EquipmentResponse(
                 equipment.getId(),
                 equipment.getEquipmentName(),
+                equipment.getImageUrl(),
                 equipment.getType(),
                 equipment.getInventoryCode(),
                 equipment.getBrand(),
@@ -44,5 +46,9 @@ public interface EquipmentMapper {
                 equipment.getTower()
         );
     };
-    List<EquipmentResponse> toEquipmentResponseList(List<Equipment> equipments);
+    default List<EquipmentResponse> toEquipmentResponseList(List<Equipment> equipments){
+        return equipments.stream()
+                .map(this::toEquipmentResponse)
+                .toList();
+    };
 }
