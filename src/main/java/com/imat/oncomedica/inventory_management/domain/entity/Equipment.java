@@ -18,8 +18,8 @@ public class Equipment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String equipmentName;
+    private String imageUrl;
     private String type;
     private String inventoryCode;
     private String brand;
