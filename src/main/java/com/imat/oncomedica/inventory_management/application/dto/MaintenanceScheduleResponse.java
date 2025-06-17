@@ -1,8 +1,9 @@
 package com.imat.oncomedica.inventory_management.application.dto;
 
 import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedule;
+import com.imat.oncomedica.inventory_management.domain.entity.MonthlyMaintenance;
 import lombok.Data;
-import java.util.Map;
+import java.util.List;
 
 @Data
 public class MaintenanceScheduleResponse {
@@ -17,15 +18,12 @@ public class MaintenanceScheduleResponse {
     private String floor;
     private String tower;
     private String area;
-    private Integer monthlyMaintenanceId;
-    private Map<String, Integer> maintenanceType;
-    private String month;
+    private List<MonthlyMaintenance> monthlyMaintenances;
 
     public MaintenanceScheduleResponse(MaintenanceSchedule maintenanceSchedule) {
         this.id = maintenanceSchedule.getId();
-        this.equipmentId = maintenanceSchedule.getEquipmentId();
-        this.monthlyMaintenanceId = maintenanceSchedule.getMonthlyMaintenanceId();
-        this.equipmentName = maintenanceSchedule.getEquipmentName();
+        this.equipmentId = maintenanceSchedule.getEquipment().getId();
+        /*this.equipmentName = maintenanceSchedule.getEquipmentName();
         this.inventoryCode = maintenanceSchedule.getInventoryCode();
         this.brand = maintenanceSchedule.getBrand();
         this.model = maintenanceSchedule.getModel();
@@ -33,8 +31,7 @@ public class MaintenanceScheduleResponse {
         this.type = maintenanceSchedule.getType();
         this.floor = maintenanceSchedule.getFloor();
         this.tower = maintenanceSchedule.getTower();
-        this.area = maintenanceSchedule.getArea();
-        this.maintenanceType = maintenanceSchedule.getMaintenanceType();
-        this.month = maintenanceSchedule.getMonth();
+        this.area = maintenanceSchedule.getArea();*/
+        this.monthlyMaintenances = maintenanceSchedule.getMonthlyMaintenances();
     }
 }
