@@ -1,5 +1,6 @@
 package com.imat.oncomedica.inventory_management.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.Date;
@@ -15,6 +16,7 @@ public class Maintenance {
 
     @ManyToOne
     @JoinColumn(name = "equipment_id")
+    @JsonIgnore
     private Equipment equipment;
 
     private String inventoryCode;
@@ -22,10 +24,6 @@ public class Maintenance {
     @ManyToOne
     @JoinColumn(name = "staff_id")
     private MaintenanceStaff maintenanceStaff;
-
-    private String name;
-
-    private String lastName;
 
     @Temporal(TemporalType.DATE)
     private Date scheduledDate;
