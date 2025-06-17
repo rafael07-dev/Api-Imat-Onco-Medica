@@ -6,6 +6,8 @@ import com.imat.oncomedica.inventory_management.application.dto.UpdateEquipmentR
 import com.imat.oncomedica.inventory_management.domain.service.EquipmentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import com.imat.oncomedica.inventory_management.application.usecase.UploadEquipmentImageUseCase;
 import java.net.URI;
 import java.util.List;
 
@@ -14,9 +16,11 @@ import java.util.List;
 public class EquipmentController {
 
     private final EquipmentService equipmentService;
+    private final UploadEquipmentImageUseCase uploadEquipmentImageUseCase;
 
-    public EquipmentController(EquipmentService equipmentService) {
+    public EquipmentController(EquipmentService equipmentService, UploadEquipmentImageUseCase uploadEquipmentImageUseCase) {
         this.equipmentService = equipmentService;
+        this.uploadEquipmentImageUseCase = uploadEquipmentImageUseCase;
     }
 
 
@@ -35,6 +39,11 @@ public class EquipmentController {
         EquipmentResponse equipmentSaved = equipmentService.saveEquipment(equipment);
         return ResponseEntity.created(URI.create("/api/equipments/" + equipmentSaved.getId()))
                 .body(equipmentSaved);
+    }
+
+    @PostMapping(value = "/{id}/image", consumes = "multipart/form-data")
+    public String uploadImage(@PathVariable Integer id, @RequestParam("file") MultipartFile file){
+        return uploadEquipmentImageUseCase.execute(id, file);
     }
 
     @PutMapping("/update/{idEquipment}")
