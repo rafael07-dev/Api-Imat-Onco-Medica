@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MaintenanceStaffRepository extends JpaRepository<MaintenanceStaff, Integer> {
+
+    MaintenanceStaff findByFirstName(String name);
 }
