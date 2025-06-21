@@ -1,7 +1,8 @@
 package com.imat.oncomedica.inventory_management.infrastructure.web;
 
-import com.imat.oncomedica.inventory_management.application.dto.MaintenanceStaffDTO;
-import com.imat.oncomedica.inventory_management.application.service.MaintenanceStaffService;
+import com.imat.oncomedica.inventory_management.application.dto.CreateMaintenanceStaffRequest;
+import com.imat.oncomedica.inventory_management.application.dto.MaintenanceStaffResponse;
+import com.imat.oncomedica.inventory_management.domain.service.MaintenanceStaffService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
@@ -11,25 +12,26 @@ import java.util.List;
 @RequestMapping("api/maintenance-staff")
 public class MaintenanceStaffController {
 
+    private final MaintenanceStaffService maintenanceStaffService;
+
     public MaintenanceStaffController(MaintenanceStaffService maintenanceStaffService) {
         this.maintenanceStaffService = maintenanceStaffService;
     }
 
-    private final MaintenanceStaffService maintenanceStaffService;
-
     @PostMapping("/create")
-    public ResponseEntity<MaintenanceStaffDTO> save(@RequestBody MaintenanceStaffDTO maintenanceStaffDTO){
-        return ResponseEntity.created(URI.create("/api/maintenance-staff/" + maintenanceStaffDTO.getId()))
-                .body(maintenanceStaffService.save(maintenanceStaffDTO));
+    public ResponseEntity<MaintenanceStaffResponse> save(@RequestBody CreateMaintenanceStaffRequest request){
+        MaintenanceStaffResponse maintenanceStaffSaved = maintenanceStaffService.createMaintenanceStaff(request);
+        return ResponseEntity.created(URI.create("/api/maintenance-staff/" + maintenanceStaffSaved.getId()))
+                .body(maintenanceStaffSaved);
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<MaintenanceStaffDTO>> findAll(){
-        return ResponseEntity.ok().body(maintenanceStaffService.findAll());
+    public ResponseEntity<List<MaintenanceStaffResponse>> findAll(){
+        return ResponseEntity.ok().body(maintenanceStaffService.getAllMaintenanceStaff());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MaintenanceStaffDTO> getById(@PathVariable Integer id){
-        return ResponseEntity.ok().body(maintenanceStaffService.getById(id));
+    public ResponseEntity<MaintenanceStaffResponse> getById(@PathVariable Integer id){
+        return ResponseEntity.ok().body(maintenanceStaffService.getMaintenanceStaffById(id));
     }
 }
