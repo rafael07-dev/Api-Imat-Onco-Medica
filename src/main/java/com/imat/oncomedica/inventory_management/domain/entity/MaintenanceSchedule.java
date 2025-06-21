@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,17 +22,11 @@ public class MaintenanceSchedule implements Serializable {
     @JoinColumn(name = "equipment_id")
     private Equipment equipment;
 
-    @OneToMany(mappedBy = "maintenanceSchedule")
+    @ManyToOne
+    @JoinColumn(name = "responsible_id")
+    private MaintenanceStaff responsible;
+
+    @OneToMany(mappedBy = "maintenanceSchedule", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MonthlyMaintenance> monthlyMaintenances;
 
-    // Detalles del equipo (redundantes para facilitar el acceso)
-    private String equipmentName;
-    private String inventoryCode;
-    private String brand;
-    private String model;
-    private String location;
-    private String type;
-    private String floor;
-    private String tower;
-    private String area;
 }
