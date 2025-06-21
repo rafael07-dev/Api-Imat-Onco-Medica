@@ -40,8 +40,6 @@ public class MaintenanceService {
         newMaintenance.setEquipment(equipment);
         newMaintenance.setInventoryCode(equipment.getInventoryCode());
         newMaintenance.setMaintenanceStaff(maintenanceStaff);
-        newMaintenance.setName(maintenanceStaff.getFirstName());
-        newMaintenance.setLastName(maintenanceStaff.getLastName());
         newMaintenance.setScheduledDate(maintenance.getScheduledDate());
         newMaintenance.setStartDate(maintenance.getStartDate());
         newMaintenance.setStartTime(maintenance.getStartTime());
