@@ -1,31 +1,30 @@
 package com.imat.oncomedica.inventory_management.application.mapper;
 
+import com.imat.oncomedica.inventory_management.application.dto.MaintenanceScheduleResponse;
 import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedule;
-import com.imat.oncomedica.inventory_management.application.dto.MaintenanceScheduleDTO;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceScheduleRepository;
+import com.imat.oncomedica.inventory_management.domain.entity.MonthlyMaintenance;
 import org.mapstruct.Mapper;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MaintenanceScheduleMapper {
 
-    List<MaintenanceScheduleDTO> maintenanceScheduleDTOS(List<MaintenanceSchedule> maintenanceSchedules);
-    MaintenanceScheduleDTO toMaintenanceScheduleDTO(MaintenanceSchedule maintenanceSchedule);
-    static MaintenanceSchedule toMaintenanceSchedule(MaintenanceScheduleDTO maintenanceScheduleDTO, MaintenanceScheduleRepository maintenanceScheduleRepository){
+    default List<MaintenanceScheduleResponse> toMaintenanceScheduleList(List<MaintenanceSchedule> maintenanceSchedules, List<MonthlyMaintenance> maintenances){
+        List<MaintenanceScheduleResponse> maintenanceScheduleResponses = new ArrayList<>();
 
-        return maintenanceScheduleRepository.findById(maintenanceScheduleDTO.getId())
-                .orElseThrow(() -> new RuntimeException("Maintenance schedule not found"));
-    }
+        maintenanceSchedules.forEach(m -> {
+            var ms = new MaintenanceScheduleResponse(
+                    m.getId(),
+                    m.getEquipment(),
+                    m.getResponsible(),
+                    maintenances
+            );
 
-    /*static List<MaintenanceSchedule> toMaintenanceScheduleList (List<MaintenanceScheduleDTO> maintenanceScheduleDTOS, EquipmentRepository equipmentRepository) {
-        Equipment equipment = equipmentRepository.findById(maintenanceScheduleDTOS.getFirst().getEquipmentId())
-                .orElseThrow(() -> new RuntimeException("Equipment not found"));
-
-        return maintenanceScheduleDTOS.stream()
-                .map(maintenanceScheduleDTO -> new MaintenanceSchedule(
-                        maintenanceScheduleDTO.getId(),
-                        equipment,
-
-                ))
-    }*/
+            maintenanceScheduleResponses.add(ms);
+        });
+        return maintenanceScheduleResponses;
+    };
+    MaintenanceScheduleResponse toMaintenanceScheduleResponse(MaintenanceSchedule maintenanceSchedule);
 }
