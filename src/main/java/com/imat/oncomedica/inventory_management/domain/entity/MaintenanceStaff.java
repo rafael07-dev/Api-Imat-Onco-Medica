@@ -22,6 +22,8 @@ public class MaintenanceStaff {
     @Column(name = "apellido", nullable = false)
     private String lastName;
 
+    private String email;
+
     private String occupation;
 
     @Column(nullable = false)
