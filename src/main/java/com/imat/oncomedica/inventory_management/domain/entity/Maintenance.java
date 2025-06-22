@@ -2,12 +2,17 @@ package com.imat.oncomedica.inventory_management.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
 @Entity
 @Table(name = "mantenimientos")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Maintenance {
 
     @Id
@@ -18,8 +23,6 @@ public class Maintenance {
     @JoinColumn(name = "equipment_id")
     @JsonIgnore
     private Equipment equipment;
-
-    private String inventoryCode;
 
     @ManyToOne
     @JoinColumn(name = "staff_id")
