@@ -19,10 +19,21 @@ public interface MaintenanceStaffMapper {
                 request.getFirstName(),
                 request.getLastName(),
                 request.getOccupation(),
+                request.getEmail(),
                 request.isAvailability(),
                 request.getMaintenanceCompleted()
         );
     };
 
-    MaintenanceStaff toMaintenanceStaff(CreateMaintenanceStaffRequest request);
+    default MaintenanceStaff toMaintenanceStaff(CreateMaintenanceStaffRequest request){
+        return  new MaintenanceStaff(
+                null,
+                request.getFirstName(),
+                request.getLastName(),
+                request.getEmail(),
+                request.getOccupation(),
+                request.isAvailability(),
+                null
+        );
+    };
 }
