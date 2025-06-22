@@ -1,8 +1,9 @@
 package com.imat.oncomedica.inventory_management.infrastructure.web;
 
-import com.imat.oncomedica.inventory_management.domain.entity.Maintenance;
-import com.imat.oncomedica.inventory_management.application.dto.MaintenanceDTO;
-import com.imat.oncomedica.inventory_management.application.service.MaintenanceService;
+import com.imat.oncomedica.inventory_management.application.dto.CreateMaintenanceRequest;
+import com.imat.oncomedica.inventory_management.application.dto.MaintenanceResponse;
+import com.imat.oncomedica.inventory_management.application.usecase.CreateMaintenanceUseCase;
+import com.imat.oncomedica.inventory_management.domain.service.MaintenanceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URI;
@@ -13,19 +14,22 @@ import java.util.List;
 public class MaintenanceController {
 
     private final MaintenanceService maintenanceService;
+    private final CreateMaintenanceUseCase createMaintenanceUseCase;
 
-    public MaintenanceController(MaintenanceService maintenanceService) {
+    public MaintenanceController(MaintenanceService maintenanceService, CreateMaintenanceUseCase createMaintenanceUseCase) {
         this.maintenanceService = maintenanceService;
+        this.createMaintenanceUseCase = createMaintenanceUseCase;
     }
 
+
     @GetMapping("/")
-    public ResponseEntity<List<MaintenanceDTO>> findAll(){
-        return ResponseEntity.ok().body(maintenanceService.findAll());
+    public ResponseEntity<List<MaintenanceResponse>> findAll(){
+        return ResponseEntity.ok().body(maintenanceService.getAllMaintenances());
     }
 
     @GetMapping("/equipment/{equipmentId}")
-    public ResponseEntity<List<Maintenance>> getMaintenancesByEquipmentId(@PathVariable Integer equipmentId) {
-        List<Maintenance> maintenances = maintenanceService.getMaintenancesByEquipmentId(equipmentId);
+    public ResponseEntity<List<MaintenanceResponse>> getMaintenancesByEquipmentId(@PathVariable Integer equipmentId) {
+        List<MaintenanceResponse> maintenances = maintenanceService.getMaintenanceByEquipmentID(equipmentId);
         if (maintenances.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -33,8 +37,8 @@ public class MaintenanceController {
     }
 
     @GetMapping("/{maintenanceStaffId}")
-    public ResponseEntity<List<Maintenance>> getMaintenancesByMaintenanceStaffId(@PathVariable Integer maintenanceStaffId) {
-        List<Maintenance> maintenances = maintenanceService.getMaintenancesByMaintenanceStaffId(maintenanceStaffId);
+    public ResponseEntity<List<MaintenanceResponse>> getMaintenancesByMaintenanceStaffId(@PathVariable Integer maintenanceStaffId) {
+        List<MaintenanceResponse> maintenances = maintenanceService.getEquipmentByStaffId(maintenanceStaffId);
         if (maintenances.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -42,8 +46,9 @@ public class MaintenanceController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<MaintenanceDTO> save(@RequestBody MaintenanceDTO maintenance){
-        return ResponseEntity.created(URI.create("/api/maintenances/" + maintenance.getId()))
-                .body(maintenanceService.save(maintenance));
+    public ResponseEntity<MaintenanceResponse> save(@RequestBody CreateMaintenanceRequest request){
+        var maintenanceResponse = createMaintenanceUseCase.execute(request);
+        return ResponseEntity.created(URI.create("/api/maintenances/" + maintenanceResponse.getId()))
+                .body(maintenanceResponse);
     }
 }
