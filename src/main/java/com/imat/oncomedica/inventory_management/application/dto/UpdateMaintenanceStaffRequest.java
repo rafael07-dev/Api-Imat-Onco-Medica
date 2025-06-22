@@ -9,6 +9,7 @@ public class UpdateMaintenanceStaffRequest {
     private String firstName;
     private String lastName;
     private String occupation;
+    private String email;
     private boolean availability; // "available" or "busy"
     private Integer maintenanceCompleted;
 }
