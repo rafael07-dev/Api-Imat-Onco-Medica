@@ -10,4 +10,5 @@ public interface MaintenanceRepository extends JpaRepository<Maintenance, Intege
 
     List<Maintenance> findByEquipmentId(Integer equipmentId);
     List<Maintenance> findByMaintenanceStaffId(Integer maintenanceStaffId);
+    Maintenance findByMaintenanceStaffFirstName(String name);
 }
