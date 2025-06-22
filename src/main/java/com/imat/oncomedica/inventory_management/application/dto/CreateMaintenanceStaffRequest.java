@@ -8,5 +8,6 @@ public class CreateMaintenanceStaffRequest {
     private String firstName;
     private String lastName;
     private String occupation;
+    private String email;
     private boolean availability;
 }
