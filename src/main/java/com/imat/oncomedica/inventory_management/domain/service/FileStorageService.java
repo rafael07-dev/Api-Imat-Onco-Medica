@@ -4,5 +4,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface FileStorageService {
 
-    String upload(Integer equipmentId, MultipartFile file);
+    String uploadEquipmentImage(Integer equipmentId, MultipartFile file);
+    String uploadMaintenanceImage(Integer maintenanceId, MultipartFile file);
 }
