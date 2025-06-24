@@ -10,4 +10,5 @@ public class CreateMaintenanceStaffRequest {
     private String occupation;
     private String email;
     private boolean availability;
+    private Integer maintenancesCompleted;
 }
