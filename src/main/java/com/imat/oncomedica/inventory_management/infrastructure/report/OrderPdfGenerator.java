@@ -37,7 +37,7 @@ public class OrderPdfGenerator implements ReportService {
             parameters.put("maintenanceStaffName", order.getMaintenanceStaff().getFirstName() + " "+ order.getMaintenanceStaff().getLastName());
             parameters.put("occupation", order.getMaintenanceStaff().getOccupation());
             parameters.put("equipmentName", order.getEquipment().getEquipmentName());
-            parameters.put("observation", order.getObservation());
+            parameters.put("observation", order.getMaintenance().getObservations());
 
             String folderPath = OUTPUT_FOLDER + order.getId() + "/";
             parameters.put("evidenceImg", folderPath + "evidence.jpg");
