@@ -57,9 +57,9 @@ public class MaintenanceStaffServiceImpl implements MaintenanceStaffService {
             throw new MaintenanceStaffNotFound();
         }
 
-        var maintenanceStaffUpdated = maintenanceStaffMapper.updateMaintenanceStaff(maintenanceStaff);
-        maintenanceStaffRepository.save(maintenanceStaffUpdated);
-        return maintenanceStaffMapper.toMaintenanceStaffResponse(maintenanceStaffSaved);
+        var maintenanceStaffUpdated = maintenanceStaffMapper.updateMaintenanceStaff(maintenanceStaff, maintenanceStaffSaved);
+        var staffSaved = maintenanceStaffRepository.save(maintenanceStaffUpdated);
+        return maintenanceStaffMapper.toMaintenanceStaffResponse(staffSaved);
     }
 
     @Override
