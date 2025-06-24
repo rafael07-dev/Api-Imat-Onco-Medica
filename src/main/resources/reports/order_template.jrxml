@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Plantilla para Orden de Mantenimiento -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="OrderReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ORDER-REPORT-TEMPLATE">
+
+    <!-- Fuentes -->
+    <style name="Title" fontName="Helvetica" fontSize="18" isBold="true"/>
+    <style name="Header" fontName="Helvetica" fontSize="12" isBold="true"/>
+    <style name="Body" fontName="Helvetica" fontSize="10"/>
+
+    <!-- Parámetros (si usas imágenes por URL o ruta) -->
+    <parameter name="evidenceImg" class="java.lang.String"/>
+    <parameter name="signatureImg" class="java.lang.String"/>
+
+    <!-- Campos que vendrán del DTO o datasource -->
+    <field name="id" class="java.lang.Integer"/>
+    <field name="creationDate" class="java.time.LocalDateTime"/>
+    <field name="maintenanceStaffName" class="java.lang.String"/>
+    <field name="equipmentName" class="java.lang.String"/>
+    <field name="observation" class="java.lang.String"/>
+
+    <!-- Encabezado del documento -->
+    <title>
+        <band height="50">
+            <textField>
+                <reportElement x="0" y="0" width="555" height="30" style="Title"/>
+                <textFieldExpression><![CDATA["Orden de Mantenimiento"]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+
+    <!-- Cuerpo principal -->
+    <detail>
+        <band height="180">
+            <textField>
+                <reportElement x="0" y="0" width="200" height="20" style="Header"/>
+                <textFieldExpression><![CDATA["ID de la Orden: " + $F{id}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="0" y="25" width="300" height="20" style="Body"/>
+                <textFieldExpression><![CDATA["Fecha de creación: " + $F{creationDate}.toString()]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="0" y="50" width="300" height="20" style="Body"/>
+                <textFieldExpression><![CDATA["Técnico responsable: " + $F{maintenanceStaffName}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="0" y="75" width="300" height="20" style="Body"/>
+                <textFieldExpression><![CDATA["Equipo: " + $F{equipmentName}]]></textFieldExpression>
+            </textField>
+
+            <textField isStretchWithOverflow="true">
+                <reportElement x="0" y="100" width="500" height="40" style="Body"/>
+                <textFieldExpression><![CDATA["Observaciones: " + $F{observation}]]></textFieldExpression>
+            </textField>
+
+            <!-- Imagen de evidencia -->
+            <image>
+                <reportElement x="0" y="145" width="100" height="80"/>
+                <imageExpression><![CDATA[new java.io.File($P{evidenceImg}).exists() ? $P{evidenceImg} : null]]></imageExpression>
+            </image>
+
+            <!-- Imagen de firma -->
+            <image>
+                <reportElement x="120" y="145" width="100" height="80"/>
+                <imageExpression><![CDATA[new java.io.File($P{signatureImg}).exists() ? $P{signatureImg} : null]]></imageExpression>
+            </image>
+
+        </band>
+    </detail>
+</jasperReport>
