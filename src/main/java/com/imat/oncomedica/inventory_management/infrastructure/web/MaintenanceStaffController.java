@@ -3,9 +3,11 @@ package com.imat.oncomedica.inventory_management.infrastructure.web;
 import com.imat.oncomedica.inventory_management.application.dto.CreateMaintenanceStaffRequest;
 import com.imat.oncomedica.inventory_management.application.dto.MaintenanceStaffResponse;
 import com.imat.oncomedica.inventory_management.application.dto.UpdateMaintenanceStaffRequest;
+import com.imat.oncomedica.inventory_management.application.usecase.UploadStaffSignatureUseCase;
 import com.imat.oncomedica.inventory_management.domain.service.MaintenanceStaffService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import java.net.URI;
 import java.util.List;
 
@@ -14,9 +16,11 @@ import java.util.List;
 public class MaintenanceStaffController {
 
     private final MaintenanceStaffService maintenanceStaffService;
+    private final UploadStaffSignatureUseCase uploadStaffSignatureUseCase;
 
-    public MaintenanceStaffController(MaintenanceStaffService maintenanceStaffService) {
+    public MaintenanceStaffController(MaintenanceStaffService maintenanceStaffService, UploadStaffSignatureUseCase uploadStaffSignatureUseCase) {
         this.maintenanceStaffService = maintenanceStaffService;
+        this.uploadStaffSignatureUseCase = uploadStaffSignatureUseCase;
     }
 
     @PostMapping("/create")
@@ -39,5 +43,10 @@ public class MaintenanceStaffController {
     @GetMapping("/{id}")
     public ResponseEntity<MaintenanceStaffResponse> getById(@PathVariable Integer id){
         return ResponseEntity.ok().body(maintenanceStaffService.getMaintenanceStaffById(id));
+    }
+
+    @PostMapping(value = "/upload-signature/{id}", consumes = "multipart/form-data")
+    public String uploadSignature(@RequestParam("file") MultipartFile file, @PathVariable Integer id){
+        return uploadStaffSignatureUseCase.execute(file, id);
     }
 }
