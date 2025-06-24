@@ -38,4 +38,8 @@ public class Equipment implements Serializable {
     @OneToMany(mappedBy = "equipment")
     @JsonIgnore
     private List<MaintenanceSchedule> maintenanceSchedules;
+
+    @OneToMany(mappedBy = "equipment", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Order> orderList;
 }

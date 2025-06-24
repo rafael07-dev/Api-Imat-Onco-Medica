@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.Date;
 
 @Entity
@@ -37,6 +36,8 @@ public class Maintenance {
 
     private Date deliveryDate;
 
+    private Date deliveryTime;
+
     private Date timeUsed;
 
     private Date registrationDate;
@@ -47,5 +48,10 @@ public class Maintenance {
     private String type;
 
     private String observations;
+
+    private String staffObservations;
+    private boolean done;
+
+    private String evidenceImg;
 
 }
