@@ -2,6 +2,7 @@ package com.imat.oncomedica.inventory_management.infrastructure.web;
 
 import com.imat.oncomedica.inventory_management.application.dto.CreateMaintenanceStaffRequest;
 import com.imat.oncomedica.inventory_management.application.dto.MaintenanceStaffResponse;
+import com.imat.oncomedica.inventory_management.application.dto.UpdateMaintenanceStaffRequest;
 import com.imat.oncomedica.inventory_management.domain.service.MaintenanceStaffService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,11 @@ public class MaintenanceStaffController {
         MaintenanceStaffResponse maintenanceStaffSaved = maintenanceStaffService.createMaintenanceStaff(request);
         return ResponseEntity.created(URI.create("/api/maintenance-staff/" + maintenanceStaffSaved.getId()))
                 .body(maintenanceStaffSaved);
+    }
+
+    @PutMapping(value = "/update/{id}", produces = "application/json")
+    public ResponseEntity<MaintenanceStaffResponse> updateStaff(@RequestBody UpdateMaintenanceStaffRequest request, @PathVariable Integer id){
+        return ResponseEntity.ok().body(maintenanceStaffService.updateMaintenanceStaff(request, id));
     }
 
     @GetMapping("/")
