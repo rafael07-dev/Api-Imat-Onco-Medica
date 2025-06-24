@@ -2,6 +2,7 @@ package com.imat.oncomedica.inventory_management.application.mapper;
 
 import com.imat.oncomedica.inventory_management.application.dto.CreateMaintenanceRequest;
 import com.imat.oncomedica.inventory_management.application.dto.MaintenanceResponse;
+import com.imat.oncomedica.inventory_management.application.dto.UpdateMaintenanceRequest;
 import com.imat.oncomedica.inventory_management.domain.entity.Equipment;
 import com.imat.oncomedica.inventory_management.domain.entity.Maintenance;
 import com.imat.oncomedica.inventory_management.application.dto.MaintenanceDTO;
@@ -17,7 +18,7 @@ public interface MaintenanceMapper {
         return new MaintenanceResponse(
                 maintenance.getId(),
                 maintenance.getEquipment().getInventoryCode(),
-                maintenance.getMaintenanceStaff().getFirstName() + maintenance.getMaintenanceStaff().getLastName(),
+                maintenance.getMaintenanceStaff().getFirstName() + " " + maintenance.getMaintenanceStaff().getLastName(),
                 maintenance.getMaintenanceStaff().getMaintenanceCompleted(),
                 maintenance.getMaintenanceStaff().getOccupation(),
                 maintenance.getScheduledDate(),
@@ -27,7 +28,9 @@ public interface MaintenanceMapper {
                 maintenance.getTimeUsed(),
                 maintenance.getRegistrationDate(),
                 maintenance.getDateOfCompletion(),
-                maintenance.getObservations()
+                maintenance.getObservations(),
+                maintenance.getStaffObservations(),
+                maintenance.isDone()
         );
     };
 
@@ -42,12 +45,36 @@ public interface MaintenanceMapper {
                 null,
                 request.getDeliveryDate(),
                 null,
+                null,
                 request.getRegistrationDate(),
                 null,
                 request.getTypeMaintenance(),
-                request.getObservations()
+                request.getObservations(),
+                null,
+                false,
+                null
         );
     };
 
-    List<MaintenanceDTO> toMaintenanceResponseList(List<Maintenance> maintenances);
+    default Maintenance updateMaintenance(UpdateMaintenanceRequest request, Equipment equipment, MaintenanceStaff maintenanceStaff){
+        return new Maintenance(
+                null,
+                equipment,
+                maintenanceStaff,
+                request.getScheduledDate(),
+                request.getStartDate(),
+                request.getStartTime(),
+                request.getDeliveryDate(),
+                request.getDeliveryTime(),
+                request.getTimeUsed(),
+                request.getRegistrationDate(),
+                request.getDateOfCompletion(),
+                request.getActivity(),
+                request.getObservations(),
+                request.getStaffObservations(),
+                request.isDone(),
+                null
+        );
+    }
+
 }
