@@ -3,6 +3,7 @@ package com.imat.oncomedica.inventory_management.config;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceMapper;
 import com.imat.oncomedica.inventory_management.application.usecase.CreateMaintenanceUseCase;
 import com.imat.oncomedica.inventory_management.domain.service.NotificationService;
+import com.imat.oncomedica.inventory_management.infrastructure.report.OrderPdfGenerator;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.EquipmentRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
@@ -18,16 +19,15 @@ public class CreateMaintenanceUseCaseConfig {
             EquipmentRepository equipmentRepository,
             MaintenanceStaffRepository maintenanceStaffRepository,
             MaintenanceMapper maintenanceMapper,
-            NotificationService notificationService
-
-    ) {
+            NotificationService notificationService,
+            OrderPdfGenerator orderPdfGenerator) {
         return new CreateMaintenanceUseCase(
                 maintenanceRepository,
                 equipmentRepository,
                 maintenanceStaffRepository,
                 maintenanceMapper,
-                notificationService
-
+                notificationService,
+                orderPdfGenerator
         );
     }
 }
