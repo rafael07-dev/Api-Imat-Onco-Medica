@@ -1,9 +1,11 @@
 package com.imat.oncomedica.inventory_management.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Entity
 @Table(name = "personal_mantenimiento")
@@ -31,5 +33,11 @@ public class MaintenanceStaff {
 
     @Column(name = "mantenimientos_completados")
     private Integer maintenanceCompleted;
+
+    private String signaturePath;
+
+    @OneToMany(mappedBy = "maintenanceStaff", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Order> orderList;
 
 }
