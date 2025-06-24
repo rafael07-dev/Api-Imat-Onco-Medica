@@ -1,120 +1,110 @@
-# 🏥 Oncomedica Inventory Management System
+# 🏥 OncoMédica – Sistema de Gestión de Mantenimientos e Inventario
 
-> Sistema de gestión de inventario y mantenimiento de equipos médicos  
-> Desarrollado con **Spring Boot** siguiendo los principios de **Arquitectura Limpia**, **SOLID**, y buenas prácticas de desarrollo profesional.
-
----
-
-## 📦 Características principales
-
-✅ Gestión de equipos médicos  
-✅ Programación y seguimiento de mantenimientos  
-✅ Registro de responsables técnicos  
-✅ Notificación automática por correo al asignar mantenimientos  
-✅ API REST estructurada por casos de uso  
-✅ Separación clara de capas (domain, application, infrastructure)
+**OncoMédica** es una aplicación profesional diseñada para clínicas, enfocada en la **gestión de inventarios de equipos médicos** y **mantenimientos técnicos**, con funcionalidades en tiempo real y principios sólidos de arquitectura limpia y buenas prácticas.
 
 ---
 
-## 🧠 Arquitectura limpia
+## 🚀 Funcionalidades principales
 
-Este proyecto sigue el enfoque de **Clean Architecture**:
-
-```
-└── com.imat.oncomedica.inventory_management
-    ├── domain                 → Entidades y contratos del dominio
-    ├── application            → Casos de uso (orquestación de lógica)
-    ├── infrastructure         → Repositorios, notificaciones, configuración
-    └── config                 → Beans de configuración (ensamblaje manual)
-```
-
-> 💡 El dominio no depende de Spring ni de ninguna tecnología externa.  
-> El caso de uso se inyecta en el controlador.  
-> La lógica de negocio no está en los controladores ni en los servicios típicos.
+- 📋 Gestión de inventario de equipos médicos.
+- 🛠️ Registro y asignación de mantenimientos (preventivos y correctivos).
+- 📁 Subida de imágenes de equipos y mantenimientos.
+- ✍️ Firma electrónica para órdenes de mantenimiento.
+- 📑 Generación automática de órdenes de mantenimiento.
+- 🔔 **Notificaciones en tiempo real** cuando un mantenimiento es asignado o actualizado.
+- 📊 Reportes detallados de mantenimientos.
+- 👥 Gestión de personal técnico.
+- 🧑‍⚕️ Roles: técnico, administrador y futuros módulos para firmas responsables.
+- ✅ Cumplimiento con buenas prácticas: SOLID, arquitectura limpia, separación por capas.
 
 ---
 
-## ⚙️ Tecnologías utilizadas
+## 🧩 Arquitectura
 
-- Java 17+
-- Spring Boot 3
-- Spring Data JPA
-- MySQL o PostgreSQL
-- JavaMailSender (para notificaciones)
-- MapStruct (para mapeo DTO-Entidad)
-- Lombok
-- Maven
+La aplicación está organizada siguiendo principios de **Arquitectura Limpia** y **DDD (Domain-Driven Design)**:
+
+- `domain/`: Entidades, interfaces y reglas del negocio.
+- `application/`: Casos de uso (por ejemplo: `CreateMaintenanceUseCase`, `UploadStaffSignatureUseCase`, etc).
+- `infrastructure/`: Implementaciones de persistencia y almacenamiento de archivos.
+- `web/`: Controladores HTTP, configuraciones de rutas y eventos en tiempo real.
 
 ---
 
-## 🛠️ Endpoints principales (REST API)
+## 🖼️ Gestión de Archivos y Firmas
 
-| Método | Ruta                        | Descripción                          |
-|--------|-----------------------------|--------------------------------------|
-| GET    | `/api/equipment`            | Lista todos los equipos              |
-| POST   | `/api/maintenances`         | Crea un mantenimiento y notifica     |
-| GET    | `/api/maintenances/{id}`    | Obtiene un mantenimiento por ID      |
-| PUT    | `/api/maintenances/{id}`    | Actualiza un mantenimiento existente |
-| DELETE | `/api/maintenances/{id}`    | Elimina un mantenimiento             |
+El sistema permite almacenar archivos relacionados con:
 
----
+- **Imágenes de equipos** en `uploads/images/equipment/{id}/`.
+- **Imágenes de mantenimientos** en `uploads/images/maintenance/{id}/`.
+- **Firmas de técnicos y administradores**:
+  - Técnicos: `uploads/images/signatures/staff/{id}/`
+  - Administradores: `uploads/images/signatures/admin/{id}/`
 
-## ✉️ Notificaciones por correo
-
-Cuando se asigna un mantenimiento a un técnico responsable, el sistema le envía automáticamente un correo con los detalles.
-
-🔧 Configura tu cuenta SMTP en `application.properties`:
-
-```properties
-spring.mail.host=smtp.gmail.com
-spring.mail.port=587
-spring.mail.username=tu_correo@gmail.com
-spring.mail.password=tu_contraseña_generada
-spring.mail.properties.mail.smtp.auth=true
-spring.mail.properties.mail.smtp.starttls.enable=true
-```
-
-> Usa una contraseña de aplicación si trabajas con Gmail.
+Estos archivos son validados por tipo (`.jpg`, `.jpeg`, `.png`, `.webp`) y organizados para un acceso rápido y seguro.
 
 ---
 
-## 🚀 Cómo ejecutar el proyecto
+## ⚡ Funcionalidad en Tiempo Real (WebSockets)
+
+El sistema utiliza WebSockets para ofrecer actualizaciones **en tiempo real**, mejorando la eficiencia operativa del personal técnico y administrativo. Actualmente, las notificaciones cubren:
+
+- ✅ **Asignación de un mantenimiento**: El técnico es notificado instantáneamente.
+- 🔄 **Cambio de estado del mantenimiento**: “En progreso”, “pausado” o “completado”.
+- 📥 **Nueva orden de trabajo generada**: Vinculada a un equipo o técnico específico.
+- 🔔 **Alertas de coordinación**: Preparado para escalar a recordatorios, cancelaciones, etc.
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+- **Backend**: Java 17 + Spring Boot
+- **Web**: Spring Web + WebSockets
+- **Persistencia**: Spring Data JPA + Hibernate + MySQL
+- **Arquitectura**: Hexagonal / Limpia
+- **DTO y Mappers**: MapStruct o manual
+- **Gestión de archivos**: `java.nio.file` + `MultipartFile`
+- **Notificaciones en tiempo real**: WebSocket API
+- **Validaciones**: Custom exceptions y validación de extensiones
+
+---
+
+## 📦 Estructura modular
 
 ```bash
-# Clonar el repositorio
-git clone https://github.com/tuusuario/oncomedica-inventory.git
-cd oncomedica-inventory
-
-# Configurar application.properties con tu base de datos y correo
-
-# Compilar y ejecutar
-./mvnw spring-boot:run
+src/
+├── domain/
+│   ├── entity/
+│   ├── exception/
+│   └── service/
+├── application/
+│   ├── dto/
+│   ├── mapper/
+│   └── usecase/
+├── infrastructure/
+│   ├── repository/
+│   └── storage/
+├── web/
+│   ├── controller/
+│   └── websocket/
 ```
 
 ---
 
-## 📸 Capturas
+## 🔒 Buenas prácticas
 
-
----
-
-## 🧪 Pruebas
-
-- Los casos de uso se pueden probar de forma aislada.
-- Se recomienda usar JUnit + Mockito para testear `CreateMaintenanceUseCase`.
+- ✅ Separación de capas (Application, Domain, Infrastructure, Web)
+- ✅ Inversión de dependencias (Interfaces en dominio, implementación en infraestructura)
+- ✅ Uso de casos de uso para lógica de negocio (evitando Services anémicos)
+- ✅ Validación temprana de archivos y parámetros
+- ✅ Diseño orientado al crecimiento y extensibilidad
 
 ---
 
-## 📄 Licencia
+## 📈 En desarrollo...
 
-Proyecto académico con fines formativos.  
-Distribuido bajo licencia MIT.
-
----
-
-## 👨‍💻 Autor
-
-Desarrollado por **Deiner Lares**  
-Tecnologo en Desarrollo de Software - SENA
-Estudiante de Ingeniería de Sistemas
-Apasionado por la arquitectura limpia y el código profesional.
+- Módulo de autenticación con JWT.
+- Sistema de permisos por rol.
+- Dashboard con estadísticas de mantenimientos.
+- Exportación de reportes en PDF.
+- Firma digital vinculada a órdenes con fecha y hora: `"Firmado por [nombre] el [fecha]"`.
+- Sistema de notificaciones por correo electrónico.
