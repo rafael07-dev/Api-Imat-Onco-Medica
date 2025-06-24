@@ -22,7 +22,7 @@ public class UploadEquipmentImageUseCase {
         Equipment equipment = repository.findById(equipmentId)
                 .orElseThrow(() -> new EquipmentNotFoundException(equipmentId));
 
-        String imageUrl = fileStorageService.upload(equipmentId, file);
+        String imageUrl = fileStorageService.uploadEquipmentImage(equipmentId, file);
 
         equipment.setImageUrl(imageUrl);
 
