@@ -115,5 +115,6 @@ Distribuido bajo licencia MIT.
 ## 👨‍💻 Autor
 
 Desarrollado por **Deiner Lares**  
-Estudiante de Análisis y Desarrollo de Software - SENA  
+Tecnologo en Desarrollo de Software - SENA
+Estudiante de Ingeniería de Sistemas
 Apasionado por la arquitectura limpia y el código profesional.
