@@ -16,17 +16,15 @@ public class FileStorageServiceImpl implements FileStorageService {
 
     private static final Logger log = LoggerFactory.getLogger(FileStorageServiceImpl.class);
     private final Path fileStorageLocation;
-    private static final String IMG_EQUIPMENT_LOCATION = "/equipment/";
-    private static final String IMG_MAINTENANCE_LOCATION = "/maintenance/";
-    private static final String SIGNATURES_STAFF = "/signatures/staff/";
-    private static final String SIGNATURES_ADMIN = "/signatures/admin/";
+    private static final String IMG_EQUIPMENT_LOCATION = "equipment";
+    private static final String IMG_MAINTENANCE_LOCATION = "maintenance";
+    private static final String SIGNATURES_STAFF = "signatures/staff";
+    private static final String SIGNATURES_ADMIN = "signatures/admin";
     private static final List<String> ALLOWED_EXTENSIONS = List.of(".jpg", ".jpeg", ".png", ".webp");
 
     public FileStorageServiceImpl() {
-        this.fileStorageLocation = Paths.get("uploads/images").toAbsolutePath().normalize();
-        initStorageDirectory();
-        initStorageEquipment();
-        initStorageMaintenance();
+        this.fileStorageLocation = Paths.get("uploads","images").toAbsolutePath().normalize();
+        initGlobalDirectory(this.fileStorageLocation);
     }
 
     @Override
@@ -49,27 +47,9 @@ public class FileStorageServiceImpl implements FileStorageService {
         return storeFile(file, SIGNATURES_ADMIN, adminId);
     }
 
-    private void initStorageDirectory() {
+    private void initGlobalDirectory(Path directory) {
         try {
-            Files.createDirectories(this.fileStorageLocation);
-        }catch (IOException e) {
-            log.error(e.getMessage());
-            throw new RuntimeException("Could not create directory {}", e);
-        }
-    }
-
-    private void initStorageEquipment(){
-        try {
-            Files.createDirectories(this.fileStorageLocation.resolve(IMG_EQUIPMENT_LOCATION));
-        }catch (IOException e) {
-            log.error(e.getMessage());
-            throw new RuntimeException("Could not create directory {}", e);
-        }
-    }
-
-    private void initStorageMaintenance(){
-        try {
-            Files.createDirectories(this.fileStorageLocation.resolve(IMG_MAINTENANCE_LOCATION));
+            Files.createDirectories(directory);
         }catch (IOException e) {
             log.error(e.getMessage());
             throw new RuntimeException("Could not create directory {}", e);
@@ -82,7 +62,7 @@ public class FileStorageServiceImpl implements FileStorageService {
         String extension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
         String newFileName = UUID.randomUUID() + extension;
 
-        Path dirPath = this.fileStorageLocation.resolve(dir + id + "/");
+        Path dirPath = this.fileStorageLocation.resolve(Paths.get(dir, id.toString()));
         Path targetPath = dirPath.resolve(newFileName);
 
         try {
@@ -93,7 +73,7 @@ public class FileStorageServiceImpl implements FileStorageService {
             throw new RuntimeException("Could not copy file {}", e);
         }
 
-        return targetPath.toString();
+        return Paths.get("uploads","images", dir, id.toString(), newFileName).toString();
     }
 
     private void validateExtension(MultipartFile file) {
