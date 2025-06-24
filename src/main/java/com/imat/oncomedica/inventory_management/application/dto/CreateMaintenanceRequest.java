@@ -1,7 +1,6 @@
 package com.imat.oncomedica.inventory_management.application.dto;
 
 import lombok.Data;
-
 import java.util.Date;
 
 @Data
@@ -15,4 +14,5 @@ public class CreateMaintenanceRequest {
     private Date registrationDate;
     private String typeMaintenance;
     private String observations;
+    private boolean done;
 }
