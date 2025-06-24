@@ -13,16 +13,14 @@ public interface MaintenanceStaffMapper {
     List<MaintenanceStaffResponse> toMaintenanceStaffResponseList(List<MaintenanceStaff> list);
     MaintenanceStaffResponse toMaintenanceStaffResponse(MaintenanceStaff maintenanceStaff);
 
-    default MaintenanceStaff updateMaintenanceStaff(UpdateMaintenanceStaffRequest request){
-        return  new MaintenanceStaff(
-                request.getId(),
-                request.getFirstName(),
-                request.getLastName(),
-                request.getOccupation(),
-                request.getEmail(),
-                request.isAvailability(),
-                request.getMaintenanceCompleted()
-        );
+    default MaintenanceStaff updateMaintenanceStaff(UpdateMaintenanceStaffRequest request, MaintenanceStaff staff){
+        staff.setFirstName(request.getFirstName());
+        staff.setLastName(request.getLastName());
+        staff.setOccupation(request.getOccupation());
+        staff.setEmail(request.getEmail());
+        staff.setAvailability(request.isAvailability());
+        request.setMaintenanceCompleted(request.getMaintenanceCompleted());
+        return  staff;
     };
 
     default MaintenanceStaff toMaintenanceStaff(CreateMaintenanceStaffRequest request){
@@ -33,6 +31,8 @@ public interface MaintenanceStaffMapper {
                 request.getEmail(),
                 request.getOccupation(),
                 request.isAvailability(),
+                request.getMaintenancesCompleted(),
+                null,
                 null
         );
     };
