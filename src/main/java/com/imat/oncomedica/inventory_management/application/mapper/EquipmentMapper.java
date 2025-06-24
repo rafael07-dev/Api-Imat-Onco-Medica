@@ -26,6 +26,7 @@ public interface EquipmentMapper {
                 equipment.getFloor(),
                 equipment.getTower(),
                 null,
+                null,
                 null
         );
     }
