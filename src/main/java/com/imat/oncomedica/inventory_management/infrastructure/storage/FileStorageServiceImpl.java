@@ -18,6 +18,8 @@ public class FileStorageServiceImpl implements FileStorageService {
     private final Path fileStorageLocation;
     private static final String IMG_EQUIPMENT_LOCATION = "/equipment/";
     private static final String IMG_MAINTENANCE_LOCATION = "/maintenance/";
+    private static final String SIGNATURES_STAFF = "/signatures/staff/";
+    private static final String SIGNATURES_ADMIN = "/signatures/admin/";
     private static final List<String> ALLOWED_EXTENSIONS = List.of(".jpg", ".jpeg", ".png", ".webp");
 
     public FileStorageServiceImpl() {
@@ -35,6 +37,16 @@ public class FileStorageServiceImpl implements FileStorageService {
     @Override
     public String uploadMaintenanceImage(Integer maintenanceId, MultipartFile file) {
         return storeFile(file, IMG_MAINTENANCE_LOCATION, maintenanceId);
+    }
+
+    @Override
+    public String uploadStaffSignature(Integer staffId, MultipartFile file) {
+        return storeFile(file, SIGNATURES_STAFF, staffId);
+    }
+
+    @Override
+    public String uploadAdminSignature(Integer adminId, MultipartFile file) {
+        return storeFile(file, SIGNATURES_ADMIN, adminId);
     }
 
     private void initStorageDirectory() {
