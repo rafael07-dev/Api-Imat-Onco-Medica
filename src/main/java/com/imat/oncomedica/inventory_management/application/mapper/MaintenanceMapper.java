@@ -72,7 +72,7 @@ public interface MaintenanceMapper {
                 request.getActivity(),
                 request.getObservations(),
                 request.getStaffObservations(),
-                request.isDone(),
+                true,
                 null
         );
     }
