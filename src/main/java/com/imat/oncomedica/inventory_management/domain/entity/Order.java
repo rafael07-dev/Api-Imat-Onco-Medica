@@ -23,7 +23,7 @@ public class Order {
     @JoinColumn(name = "equipment_id")
     private Equipment equipment;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "maintenance_id")
     private Maintenance maintenance;
 
