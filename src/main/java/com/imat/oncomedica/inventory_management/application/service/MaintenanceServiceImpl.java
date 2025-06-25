@@ -58,7 +58,9 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
     @Override
     public String deleteMaintenance(Integer id) {
-        return "";
+        maintenanceRepository.deleteById(id);
+
+        return "Maintenance deleted";
     }
 
 }
