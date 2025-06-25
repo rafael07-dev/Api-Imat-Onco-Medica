@@ -6,15 +6,11 @@ import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceMa
 import com.imat.oncomedica.inventory_management.domain.entity.Equipment;
 import com.imat.oncomedica.inventory_management.domain.entity.Maintenance;
 import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceStaff;
-import com.imat.oncomedica.inventory_management.domain.entity.OrderStatus;
 import com.imat.oncomedica.inventory_management.domain.exception.EquipmentNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceNotFoundException;
-import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceStaffNotFound;
-import com.imat.oncomedica.inventory_management.infrastructure.report.OrderPdfGenerator;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.EquipmentRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.OrderRepository;
 
 public class UpdateMaintenanceUseCase {
 
@@ -22,32 +18,21 @@ public class UpdateMaintenanceUseCase {
     private final MaintenanceMapper maintenanceMapper;
     private final MaintenanceStaffRepository maintenanceStaffRepository;
     private final EquipmentRepository equipmentRepository;
-    private final OrderRepository orderRepository;
-    private final OrderPdfGenerator orderPdfGenerator;
 
-    public UpdateMaintenanceUseCase(MaintenanceRepository maintenanceRepository,
-                                    MaintenanceMapper maintenanceMapper,
-                                    MaintenanceStaffRepository maintenanceStaffRepository,
-                                    EquipmentRepository equipmentRepository, OrderRepository orderRepository,
-                                    OrderPdfGenerator orderPdfGenerator)
-    {
-
+    public UpdateMaintenanceUseCase(MaintenanceRepository maintenanceRepository, MaintenanceMapper maintenanceMapper, MaintenanceStaffRepository maintenanceStaffRepository, EquipmentRepository equipmentRepository) {
         this.maintenanceRepository = maintenanceRepository;
         this.maintenanceMapper = maintenanceMapper;
         this.maintenanceStaffRepository = maintenanceStaffRepository;
         this.equipmentRepository = equipmentRepository;
-        this.orderRepository = orderRepository;
-        this.orderPdfGenerator = orderPdfGenerator;
     }
 
 
-    public MaintenanceResponse execute(Integer maintenanceId, Integer staffId, UpdateMaintenanceRequest request){
+    public MaintenanceResponse execute(Integer maintenanceId, UpdateMaintenanceRequest request){
 
         var maintenance = maintenanceRepository.findById(maintenanceId)
                 .orElseThrow(() -> new MaintenanceNotFoundException(maintenanceId));
 
-        var staff = maintenanceStaffRepository.findById(staffId)
-                .orElseThrow(() -> new MaintenanceStaffNotFound(staffId));
+        var staff = maintenance.getMaintenanceStaff();
 
         var equipment = equipmentRepository.findById(maintenance.getEquipment().getId())
                 .orElseThrow(() -> new EquipmentNotFoundException(maintenance.getEquipment().getId()));
@@ -58,11 +43,6 @@ public class UpdateMaintenanceUseCase {
         maintenanceStaffRepository.save(staff);
 
         var maintenanceSaved = maintenanceRepository.save(maintenance);
-
-        var order = orderRepository.findByMaintenance_Id(maintenanceId);
-
-        order.setStatus(OrderStatus.COMPLETED);
-        orderPdfGenerator.generateOderReport(order);
 
         return maintenanceMapper.toMaintenanceResponse(maintenanceSaved);
     }
