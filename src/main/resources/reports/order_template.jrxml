@@ -1,76 +1,155 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Plantilla para Orden de Mantenimiento -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
-              name="OrderReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ORDER-REPORT-TEMPLATE">
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="order_template" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5a0f8b93-2c71-4299-a3d4-5d131fe68ab9">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+    <parameter name="deliveryDate" class="java.lang.String"/>
+    <parameter name="observation" class="java.lang.String"/>
+    <parameter name="creationDate" class="java.lang.String"/>
+    <parameter name="startDate" class="java.lang.String"/>
+    <parameter name="startTime" class="java.lang.String"/>
+    <parameter name="deliveryTime" class="java.lang.String"/>
+    <parameter name="timeUsed" class="java.lang.String"/>
+    <parameter name="maintenanceStaffName" class="java.lang.String"/>
+    <parameter name="occupation" class="java.lang.String"/>
 
-    <!-- Fuentes -->
-    <style name="Title" fontName="Helvetica" fontSize="18" isBold="true"/>
-    <style name="Header" fontName="Helvetica" fontSize="12" isBold="true"/>
-    <style name="Body" fontName="Helvetica" fontSize="10"/>
+    <parameter name="maintenanceStaffName2" class="java.lang.String"/>
+    <parameter name="occupation2" class="java.lang.String"/>
 
-    <!-- Parámetros (si usas imágenes por URL o ruta) -->
-    <parameter name="evidenceImg" class="java.lang.String"/>
-    <parameter name="signatureImg" class="java.lang.String"/>
-
-    <!-- Campos que vendrán del DTO o datasource -->
-    <field name="id" class="java.lang.Integer"/>
-    <field name="creationDate" class="java.time.LocalDateTime"/>
-    <field name="maintenanceStaffName" class="java.lang.String"/>
-    <field name="equipmentName" class="java.lang.String"/>
-    <field name="observation" class="java.lang.String"/>
-
-    <!-- Encabezado del documento -->
-    <title>
-        <band height="50">
-            <textField>
-                <reportElement x="0" y="0" width="555" height="30" style="Title"/>
-                <textFieldExpression><![CDATA["Orden de Mantenimiento"]]></textFieldExpression>
-            </textField>
-        </band>
+    <parameter name="signatureImg" class="java.io.InputStream"/>
+    <parameter name="signature2Img" class="java.io.InputStream"/>
+    <query language="sql"><![CDATA[]]></query>
+    <background splitType="Stretch"/>
+    <title height="75" splitType="Stretch">
+        <element kind="image" uuid="06879205-ae0d-44b3-ab4d-4997d4e07475" x="490" y="7" width="70" height="60">
+            <expression><![CDATA["C:/Users/Deiner Rafael/Downloads/imat.png"]]></expression>
+            <property name="com.jaspersoft.studio.unit.width" value="px"/>
+        </element>
+        <element kind="staticText" uuid="9af2d380-6344-4a15-8a3b-2461796abff1" x="160" y="7" width="330" height="60" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[Area administrativa gestion de infra estructura]]></text>
+        </element>
+        <element kind="staticText" uuid="73788e5c-ab33-40ea-a5c7-c57338285866" x="-11" y="7" width="171" height="21" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[Codigo:
+FR-AD-GSI-005]]></text>
+        </element>
+        <element kind="staticText" uuid="dc181ec4-0130-484f-9aaf-d3b848677645" x="-10" y="37" width="92" height="30" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[Fecha aprobacion
+]]></text>
+        </element>
+        <element kind="textField" uuid="f3456b63-700d-4783-9c19-e28a139f11a5" x="82" y="37" width="78" height="30" vTextAlign="Middle">
+            <expression><![CDATA[$P{deliveryDate}]]></expression>
+            <patternExpression><![CDATA[$P{deliveryDate}]]></patternExpression>
+        </element>
     </title>
+    <pageHeader height="54" splitType="Stretch">
+        <element kind="staticText" uuid="ac94e0c0-c740-4c73-b7b0-e23313a3f2ae" x="-8" y="-10" width="570" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[OBSERVACIONES GENERALES]]></text>
+        </element>
+        <element kind="textField" uuid="b8ca8cc4-85e4-4ef7-801c-35a3c0f12bc2" x="-10" y="10" width="570" height="44" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+            <expression><![CDATA[$P{observation}]]></expression>
+            <patternExpression><![CDATA[$P{observation}]]></patternExpression>
+        </element>
+    </pageHeader>
+    <columnHeader height="69" splitType="Stretch">
+        <element kind="staticText" uuid="c4c773b1-1859-466a-961a-b6fd59041292" x="-10" y="49" width="97" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[Nombre]]></text>
+        </element>
+        <element kind="staticText" uuid="8ba41213-ac27-408d-893d-78787e71347f" x="-10" y="24" width="92" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[Fecha de reporte
+]]></text>
+        </element>
+        <element kind="textField" uuid="b4360ce0-a8be-4fe1-b860-ab85b01be590" x="87" y="49" width="189" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <expression><![CDATA[$P{maintenanceStaffName}]]></expression>
+            <patternExpression><![CDATA[$P{creationDate}]]></patternExpression>
+        </element>
+        <element kind="textField" uuid="4dbb7fe0-70fe-44fa-b83f-02918c1a7d61" x="87" y="24" width="98" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <expression><![CDATA[$P{creationDate}]]></expression>
+            <patternExpression><![CDATA[$P{creationDate}]]></patternExpression>
+        </element>
+        <element kind="staticText" uuid="eae86553-46e2-44d4-9fb7-84f187e39276" x="185" y="29" width="92" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[Fecha de inicio
 
-    <!-- Cuerpo principal -->
+]]></text>
+        </element>
+        <element kind="staticText" uuid="81d3543c-737d-4c8e-949f-09316f21f287" x="282" y="49" width="97" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[Nombre]]></text>
+        </element>
+        <element kind="textField" uuid="5326b03f-a0c2-4076-af83-68e6180f4afe" x="281" y="29" width="98" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <expression><![CDATA[$P{startDate}]]></expression>
+            <patternExpression><![CDATA[$P{creationDate}]]></patternExpression>
+        </element>
+        <element kind="textField" uuid="493f0e6a-3673-4649-992c-70490d7945cf" x="387" y="49" width="173" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <expression><![CDATA[$P{maintenanceStaffName2}]]></expression>
+            <patternExpression><![CDATA[$P{creationDate}]]></patternExpression>
+        </element>
+        <element kind="staticText" uuid="86c54ce3-5949-4bc4-8b11-1d2663644be3" x="379" y="29" width="92" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[Hora de inicio]]></text>
+        </element>
+        <element kind="textField" uuid="6862e96c-4dd7-4a8f-8b96-05ea4c544dbe" x="470" y="29" width="98" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <expression><![CDATA[$P{startTime}]]></expression>
+            <patternExpression><![CDATA[$P{creationDate}]]></patternExpression>
+        </element>
+        <element kind="staticText" uuid="de4b58b8-4a0c-4eb9-8ca2-4d69d6666685" x="-9" y="4" width="271" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[Datos de quien realiza ]]></text>
+        </element>
+        <element kind="staticText" uuid="397189f1-4ee8-4c4d-82a7-d9eaa258d363" x="262" y="4" width="298" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[Datos de quien recibe
+]]></text>
+        </element>
+    </columnHeader>
     <detail>
-        <band height="180">
-            <textField>
-                <reportElement x="0" y="0" width="200" height="20" style="Header"/>
-                <textFieldExpression><![CDATA["ID de la Orden: " + $F{id}]]></textFieldExpression>
-            </textField>
+        <band height="108" splitType="Stretch">
+            <element kind="staticText" uuid="d9bd8f5a-af04-4934-9008-69a3c1e86c39" x="-10" y="0" width="92" height="20" hTextAlign="Center" vTextAlign="Middle">
+                <text><![CDATA[Fecha de entrega
 
-            <textField>
-                <reportElement x="0" y="25" width="300" height="20" style="Body"/>
-                <textFieldExpression><![CDATA["Fecha de creación: " + $F{creationDate}.toString()]]></textFieldExpression>
-            </textField>
-
-            <textField>
-                <reportElement x="0" y="50" width="300" height="20" style="Body"/>
-                <textFieldExpression><![CDATA["Técnico responsable: " + $F{maintenanceStaffName}]]></textFieldExpression>
-            </textField>
-
-            <textField>
-                <reportElement x="0" y="75" width="300" height="20" style="Body"/>
-                <textFieldExpression><![CDATA["Equipo: " + $F{equipmentName}]]></textFieldExpression>
-            </textField>
-
-            <textField isStretchWithOverflow="true">
-                <reportElement x="0" y="100" width="500" height="40" style="Body"/>
-                <textFieldExpression><![CDATA["Observaciones: " + $F{observation}]]></textFieldExpression>
-            </textField>
-
-            <!-- Imagen de evidencia -->
-            <image>
-                <reportElement x="0" y="145" width="100" height="80"/>
-                <imageExpression><![CDATA[new java.io.File($P{evidenceImg}).exists() ? $P{evidenceImg} : null]]></imageExpression>
-            </image>
-
-            <!-- Imagen de firma -->
-            <image>
-                <reportElement x="120" y="145" width="100" height="80"/>
-                <imageExpression><![CDATA[new java.io.File($P{signatureImg}).exists() ? $P{signatureImg} : null]]></imageExpression>
-            </image>
-
+]]></text>
+            </element>
+            <element kind="textField" uuid="91ea1fa7-b0cd-44d4-be70-956b61abea4d" x="82" y="0" width="98" height="20" hTextAlign="Center" vTextAlign="Middle">
+                <expression><![CDATA[$P{deliveryDate}]]></expression>
+                <patternExpression><![CDATA[$P{creationDate}]]></patternExpression>
+            </element>
+            <element kind="staticText" uuid="bfecef37-d731-40fc-b748-2ca753612ce5" x="182" y="0" width="92" height="20" hTextAlign="Center" vTextAlign="Middle">
+                <text><![CDATA[Hora de entrega]]></text>
+            </element>
+            <element kind="textField" uuid="bc8a9b06-5803-4f33-afd6-f8a9b7154a84" x="284" y="0" width="92" height="20" hTextAlign="Center" vTextAlign="Middle">
+                <expression><![CDATA[$P{deliveryTime}]]></expression>
+                <patternExpression><![CDATA[$P{creationDate}]]></patternExpression>
+            </element>
+            <element kind="staticText" uuid="67d1e676-66ac-4429-b834-401c06df51fa" x="379" y="0" width="92" height="20" hTextAlign="Center" vTextAlign="Middle">
+                <text><![CDATA[Tiempo utilizado]]></text>
+            </element>
+            <element kind="textField" uuid="d76f1b1b-b50f-49e6-9584-8cd474331a0e" x="470" y="0" width="98" height="20" hTextAlign="Center" vTextAlign="Middle">
+                <expression><![CDATA[$P{timeUsed}]]></expression>
+                <patternExpression><![CDATA[$P{creationDate}]]></patternExpression>
+            </element>
+            <element kind="textField" uuid="2e50eaa3-9087-45ff-9b43-d949ab9afe3a" x="88" y="20" width="190" height="20" hTextAlign="Center" vTextAlign="Middle">
+                <expression><![CDATA[$P{occupation}]]></expression>
+                <patternExpression><![CDATA[$P{creationDate}]]></patternExpression>
+            </element>
+            <element kind="staticText" uuid="81ebbd51-af0a-4d10-a885-2eaba417fb8c" x="-9" y="20" width="96" height="20" hTextAlign="Center" vTextAlign="Middle">
+                <text><![CDATA[Cargo]]></text>
+            </element>
+            <element kind="textField" uuid="ce5c2598-73ad-4378-99f9-2c2de6138f1a" x="379" y="20" width="174" height="20" hTextAlign="Center" vTextAlign="Middle">
+                <expression><![CDATA[$P{occupation2}]]></expression>
+                <patternExpression><![CDATA[$P{creationDate}]]></patternExpression>
+            </element>
+            <element kind="staticText" uuid="e8fdb74f-e6e4-489d-bb4d-042801c4f170" x="282" y="20" width="96" height="20" hTextAlign="Center" vTextAlign="Middle">
+                <text><![CDATA[Cargo]]></text>
+            </element>
         </band>
     </detail>
+    <columnFooter height="50" splitType="Stretch">
+        <element kind="image" uuid="cfd6e821-d11c-46f3-ab56-f1c3d5a9b8ff" x="120" y="16" width="80" height="34" linkType="None" linkTarget="Self">
+            <expression><![CDATA[$P{signatureImg}]]></expression>
+        </element>
+        <element kind="image" uuid="4128644a-5ea3-47e2-b40c-f5b59cf64a08" x="400" y="16" width="71" height="30">
+            <expression><![CDATA[$P{signature2Img}]]></expression>
+        </element>
+        <element kind="staticText" uuid="cdbd8922-e475-494b-8480-3212067754d7" x="291" y="16" width="96" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[Firma]]></text>
+        </element>
+        <element kind="staticText" uuid="c9512d4f-8239-493a-bbfc-3c0f86ee08ca" x="20" y="21" width="96" height="20" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[Firma]]></text>
+        </element>
+    </columnFooter>
+    <pageFooter height="2" splitType="Stretch"/>
+    <summary height="59" splitType="Stretch"/>
 </jasperReport>
