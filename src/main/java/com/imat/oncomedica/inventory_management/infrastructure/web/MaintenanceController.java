@@ -3,8 +3,10 @@ package com.imat.oncomedica.inventory_management.infrastructure.web;
 import com.imat.oncomedica.inventory_management.application.dto.CreateMaintenanceRequest;
 import com.imat.oncomedica.inventory_management.application.dto.MaintenanceResponse;
 import com.imat.oncomedica.inventory_management.application.dto.UpdateMaintenanceRequest;
+import com.imat.oncomedica.inventory_management.application.usecase.CompleteMaintenanceUseCase;
 import com.imat.oncomedica.inventory_management.application.usecase.CreateMaintenanceUseCase;
 import com.imat.oncomedica.inventory_management.application.usecase.UpdateMaintenanceUseCase;
+import com.imat.oncomedica.inventory_management.application.usecase.UploadMaintenanceImageUseCase;
 import com.imat.oncomedica.inventory_management.domain.service.MaintenanceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +21,16 @@ public class MaintenanceController {
 
     private final MaintenanceService maintenanceService;
     private final CreateMaintenanceUseCase createMaintenanceUseCase;
+    private final UploadMaintenanceImageUseCase uploadMaintenanceImageUseCase;
     private final UpdateMaintenanceUseCase updateMaintenanceUseCase;
+    private final CompleteMaintenanceUseCase completeMaintenanceUseCase;
 
-    public MaintenanceController(MaintenanceService maintenanceService, CreateMaintenanceUseCase createMaintenanceUseCase, UpdateMaintenanceUseCase updateMaintenanceUseCase) {
+    public MaintenanceController(MaintenanceService maintenanceService, CreateMaintenanceUseCase createMaintenanceUseCase, UploadMaintenanceImageUseCase uploadMaintenanceImageUseCase, UpdateMaintenanceUseCase updateMaintenanceUseCase, CompleteMaintenanceUseCase completeMaintenanceUseCase) {
         this.maintenanceService = maintenanceService;
         this.createMaintenanceUseCase = createMaintenanceUseCase;
+        this.uploadMaintenanceImageUseCase = uploadMaintenanceImageUseCase;
         this.updateMaintenanceUseCase = updateMaintenanceUseCase;
+        this.completeMaintenanceUseCase = completeMaintenanceUseCase;
     }
 
 
@@ -51,11 +57,17 @@ public class MaintenanceController {
         return ResponseEntity.ok(maintenances);
     }
 
-    @PutMapping("/{staffId}/update/{maintenanceId}")
+    @PutMapping("/update/{maintenanceId}")
     public ResponseEntity<MaintenanceResponse> updateMaintenance(@PathVariable Integer maintenanceId,
-                                                                 @PathVariable Integer staffId,
                                                                  @RequestBody UpdateMaintenanceRequest request) {
-        MaintenanceResponse response = updateMaintenanceUseCase.execute(maintenanceId, staffId, request);
+        MaintenanceResponse response = updateMaintenanceUseCase.execute(maintenanceId, request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping("/completed/{maintenanceId}")
+    public ResponseEntity<MaintenanceResponse> maintenanceCompleted(@PathVariable Integer maintenanceId,
+                                                                 @RequestBody UpdateMaintenanceRequest request) {
+        MaintenanceResponse response = completeMaintenanceUseCase.execute(request, maintenanceId);
         return ResponseEntity.ok(response);
     }
 
@@ -66,8 +78,14 @@ public class MaintenanceController {
                 .body(maintenanceResponse);
     }
 
-    @PostMapping("/upload-image/{maintenanceId}")
-    public ResponseEntity<String> save(@RequestBody MultipartFile file, @PathVariable Integer maintenanceId){
+    @PostMapping(value = "/upload-image/{maintenanceId}", consumes = "multipart/form-data")
+    public String updateMaintenanceImage(@RequestParam("file") MultipartFile file, @PathVariable Integer maintenanceId){
+        return uploadMaintenanceImageUseCase.UploadMaintenanceImageUseCase(file, maintenanceId);
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable("id") Integer maintenanceId){
+        return ResponseEntity.ok()
+                .body(maintenanceService.deleteMaintenance(maintenanceId));
     }
 }
