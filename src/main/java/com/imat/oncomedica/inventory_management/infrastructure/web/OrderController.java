@@ -31,9 +31,9 @@ public class OrderController {
                 .body(orderService.getOrderById(id));
     }
 
-    @GetMapping("/{staffId}")
-    public ResponseEntity<List<OrderResponse>> getOrderByStaffId(@PathVariable Integer staffId){
+    @GetMapping("/staff/{id}")
+    public ResponseEntity<List<OrderResponse>> getOrderByStaffId(@PathVariable Integer id){
         return ResponseEntity.ok()
-                .body(orderService.getOrdersByStaffId(staffId));
+                .body(orderService.getOrdersByStaffId(id));
     }
 }
