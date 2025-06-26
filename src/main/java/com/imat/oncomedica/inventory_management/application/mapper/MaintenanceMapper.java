@@ -5,10 +5,8 @@ import com.imat.oncomedica.inventory_management.application.dto.MaintenanceRespo
 import com.imat.oncomedica.inventory_management.application.dto.UpdateMaintenanceRequest;
 import com.imat.oncomedica.inventory_management.domain.entity.Equipment;
 import com.imat.oncomedica.inventory_management.domain.entity.Maintenance;
-import com.imat.oncomedica.inventory_management.application.dto.MaintenanceDTO;
 import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceStaff;
 import org.mapstruct.Mapper;
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MaintenanceMapper {
@@ -76,5 +74,4 @@ public interface MaintenanceMapper {
                 null
         );
     }
-
 }

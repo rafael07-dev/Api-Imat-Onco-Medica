@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "mantenimientos")
@@ -27,23 +27,21 @@ public class Maintenance {
     @JoinColumn(name = "staff_id")
     private MaintenanceStaff maintenanceStaff;
 
-    @Temporal(TemporalType.DATE)
-    private Date scheduledDate;
+    private LocalDateTime scheduledDate;
 
-    private Date startDate;
+    private LocalDateTime startDate;
 
-    private Date startTime;
+    private LocalDateTime startTime;
 
-    private Date deliveryDate;
+    private LocalDateTime deliveryDate;
 
-    private Date deliveryTime;
+    private LocalDateTime deliveryTime;
 
-    private Date timeUsed;
+    private LocalDateTime timeUsed;
 
-    private Date registrationDate;
+    private LocalDateTime registrationDate;
 
-    @Temporal(TemporalType.DATE)
-    private Date dateOfCompletion;
+    private LocalDateTime dateOfCompletion;
 
     private String type;
 
