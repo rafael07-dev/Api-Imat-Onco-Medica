@@ -1,11 +1,12 @@
 package com.imat.oncomedica.inventory_management.application.dto;
 
 import lombok.Data;
-import java.util.Map;
+import java.util.List;
 
 @Data
 public class CreateMonthlyMaintenanceRequest {
 
-    private String month;
-    private Map<String, Integer> maintenanceType;
+    private Integer month;
+    private int year;
+    private List<CreateMonthlyMaintenanceTypeRequest> maintenanceType;
 }
