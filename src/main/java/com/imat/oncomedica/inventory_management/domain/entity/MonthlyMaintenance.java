@@ -5,10 +5,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 import java.io.Serializable;
-import java.util.Map;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,9 +23,11 @@ public class MonthlyMaintenance implements Serializable {
     @JsonIgnore
     private MaintenanceSchedule maintenanceSchedule;
 
-    private String month;
+    private Integer month;
 
-    @JdbcTypeCode(SqlTypes.JSON)
-    private Map<String, Integer> maintenanceType;
+    private Integer year;
+
+    @OneToMany(mappedBy = "monthlyMaintenance", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MonthlyMaintenanceType> maintenanceTypes;
 
 }
