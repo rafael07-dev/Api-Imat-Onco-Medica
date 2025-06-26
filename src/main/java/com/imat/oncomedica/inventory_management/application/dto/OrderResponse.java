@@ -14,5 +14,4 @@ public class OrderResponse {
     private MaintenanceStaff maintenanceStaff;
     private Equipment equipment;
     private OrderStatus status;
-    private String observation;
 }
