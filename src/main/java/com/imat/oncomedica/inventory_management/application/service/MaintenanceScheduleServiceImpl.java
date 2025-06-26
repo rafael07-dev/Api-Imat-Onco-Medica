@@ -13,7 +13,6 @@ import com.imat.oncomedica.inventory_management.infrastructure.repository.Mainte
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MonthlyMaintenanceRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 
 @Service
@@ -45,14 +44,9 @@ public class MaintenanceScheduleServiceImpl implements MaintenanceScheduleServic
     public List<MaintenanceScheduleResponse> getAllMaintenanceSchedules() {
         List<MaintenanceSchedule> maintenanceSchedules = maintenanceScheduleRepository.findAll();
 
-        List<MonthlyMaintenance> maintenancesList = new ArrayList<>();
-
-        maintenanceSchedules.forEach(maintenanceSchedule -> {
-             List<MonthlyMaintenance> maintenances = monthlyMaintenanceRepository.findByMaintenanceSchedule_Id(maintenanceSchedule.getId());
-             maintenancesList.addAll(maintenances);
-        });
-
-        return maintenanceScheduleMapper.toMaintenanceScheduleList(maintenanceSchedules, maintenancesList);
+        return maintenanceSchedules.stream()
+                .map(m -> maintenanceScheduleMapper.toMaintenanceScheduleResponse(m))
+                .toList();
     }
 
     @Override
@@ -69,30 +63,32 @@ public class MaintenanceScheduleServiceImpl implements MaintenanceScheduleServic
     }
 
     @Override
-    public MaintenanceScheduleResponse createMaintenanceSchedule(CreateMaintenanceScheduleRequest createMaintenanceSchedule) {
-        var equipment = equipmentRepository.findById(createMaintenanceSchedule.getEquipmentId())
-                .orElseThrow(() -> new EquipmentNotFoundException(createMaintenanceSchedule.getEquipmentId()));
+    public MaintenanceScheduleResponse createMaintenanceSchedule(CreateMaintenanceScheduleRequest request) {
+        var equipment = equipmentRepository.findById(request.getEquipmentId())
+                .orElseThrow(() -> new EquipmentNotFoundException(request.getEquipmentId()));
 
-        var maintenanceStaff = maintenanceStaffRepository.findById(createMaintenanceSchedule.getMaintenanceStaffId())
-                .orElseThrow(() -> new MaintenanceStaffNotFound(createMaintenanceSchedule.getMaintenanceStaffId()));
+        var maintenanceStaff = maintenanceStaffRepository.findById(request.getMaintenanceStaffId())
+                .orElseThrow(() -> new MaintenanceStaffNotFound(request.getMaintenanceStaffId()));
 
         var maintenanceSchedule = new MaintenanceSchedule();
 
         maintenanceSchedule.setEquipment(equipment);
         maintenanceSchedule.setResponsible(maintenanceStaff);
+        maintenanceSchedule.setMonthlyMaintenances(new ArrayList<>());
 
-        var maintenances = createMaintenanceSchedule.getMonths()
+        var maintenanceList = maintenanceSchedule.getMonthlyMaintenances();
+
+        request.getMonths()
                 .stream()
-                .map(month -> {
+                .forEach(month -> {
                     var mm = new MonthlyMaintenance();
+
                     mm.setMonth(month.getMonth());
                     mm.setMaintenanceType(month.getMaintenanceType());
                     mm.setMaintenanceSchedule(maintenanceSchedule);
 
-                    return mm;
-                }).toList();
-
-        maintenanceSchedule.setMonthlyMaintenances(maintenances);
+                    maintenanceList.add(mm);
+                });
 
         var maintenanceSaved = maintenanceScheduleRepository.save(maintenanceSchedule);
 
