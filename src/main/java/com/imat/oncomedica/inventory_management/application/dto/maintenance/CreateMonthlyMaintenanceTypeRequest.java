@@ -1,10 +1,10 @@
-package com.imat.oncomedica.inventory_management.application.dto;
+package com.imat.oncomedica.inventory_management.application.dto.maintenance;
 
 import lombok.Data;
 
 @Data
 public class CreateMonthlyMaintenanceTypeRequest {
 
-    private CreateMaintenanceTypeRequest maintenanceType;
+    private String maintenanceType;
     private Integer quantity;
 }
