@@ -1,6 +1,6 @@
 package com.imat.oncomedica.inventory_management.infrastructure.web;
 
-import com.imat.oncomedica.inventory_management.application.dto.OrderResponse;
+import com.imat.oncomedica.inventory_management.application.dto.order.OrderResponse;
 import com.imat.oncomedica.inventory_management.domain.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

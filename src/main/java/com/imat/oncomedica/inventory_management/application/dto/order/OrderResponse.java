@@ -1,4 +1,4 @@
-package com.imat.oncomedica.inventory_management.application.dto;
+package com.imat.oncomedica.inventory_management.application.dto.order;
 
 import com.imat.oncomedica.inventory_management.domain.entity.Equipment;
 import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceStaff;

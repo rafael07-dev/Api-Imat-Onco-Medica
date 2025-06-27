@@ -1,6 +1,6 @@
 package com.imat.oncomedica.inventory_management.application.service;
 
-import com.imat.oncomedica.inventory_management.application.dto.OrderResponse;
+import com.imat.oncomedica.inventory_management.application.dto.order.OrderResponse;
 import com.imat.oncomedica.inventory_management.application.mapper.OrderMapper;
 import com.imat.oncomedica.inventory_management.domain.entity.Order;
 import com.imat.oncomedica.inventory_management.domain.exception.OrderNotFoundException;

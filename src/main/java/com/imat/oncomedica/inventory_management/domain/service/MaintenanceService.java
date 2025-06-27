@@ -1,7 +1,7 @@
 package com.imat.oncomedica.inventory_management.domain.service;
 
-import com.imat.oncomedica.inventory_management.application.dto.CreateMaintenanceRequest;
-import com.imat.oncomedica.inventory_management.application.dto.MaintenanceResponse;
+import com.imat.oncomedica.inventory_management.application.dto.maintenance.CreateMaintenanceRequest;
+import com.imat.oncomedica.inventory_management.application.dto.maintenance.MaintenanceResponse;
 import java.util.List;
 
 public interface MaintenanceService {

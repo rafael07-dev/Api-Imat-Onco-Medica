@@ -1,8 +1,8 @@
 package com.imat.oncomedica.inventory_management.domain.service;
 
-import com.imat.oncomedica.inventory_management.application.dto.CreateEquipmentRequest;
-import com.imat.oncomedica.inventory_management.application.dto.EquipmentResponse;
-import com.imat.oncomedica.inventory_management.application.dto.UpdateEquipmentRequest;
+import com.imat.oncomedica.inventory_management.application.dto.equipment.CreateEquipmentRequest;
+import com.imat.oncomedica.inventory_management.application.dto.equipment.EquipmentResponse;
+import com.imat.oncomedica.inventory_management.application.dto.equipment.UpdateEquipmentRequest;
 
 import java.util.List;
 

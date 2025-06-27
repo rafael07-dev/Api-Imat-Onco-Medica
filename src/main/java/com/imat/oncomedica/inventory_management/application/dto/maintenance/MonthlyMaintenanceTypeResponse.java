@@ -1,4 +1,9 @@
 package com.imat.oncomedica.inventory_management.application.dto.maintenance;
 
-public class MontlyMaintenaceTypeResponse {
+import lombok.Data;
+
+@Data
+public class MonthlyMaintenanceTypeResponse {
+    private String maintenanceType;
+    private Integer quantity;
 }

@@ -1,7 +1,7 @@
 package com.imat.oncomedica.inventory_management.application.service;
 
-import com.imat.oncomedica.inventory_management.application.dto.CreateMaintenanceRequest;
-import com.imat.oncomedica.inventory_management.application.dto.MaintenanceResponse;
+import com.imat.oncomedica.inventory_management.application.dto.maintenance.CreateMaintenanceRequest;
+import com.imat.oncomedica.inventory_management.application.dto.maintenance.MaintenanceResponse;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceMapper;
 import com.imat.oncomedica.inventory_management.domain.service.MaintenanceService;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceRepository;

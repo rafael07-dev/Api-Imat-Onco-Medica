@@ -1,8 +1,8 @@
 package com.imat.oncomedica.inventory_management.infrastructure.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.imat.oncomedica.inventory_management.application.dto.CreateEquipmentRequest;
-import com.imat.oncomedica.inventory_management.application.dto.EquipmentResponse;
+import com.imat.oncomedica.inventory_management.application.dto.equipment.CreateEquipmentRequest;
+import com.imat.oncomedica.inventory_management.application.dto.equipment.EquipmentResponse;
 import com.imat.oncomedica.inventory_management.domain.service.EquipmentService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.MediaType;

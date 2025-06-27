@@ -1,8 +1,8 @@
 package com.imat.oncomedica.inventory_management.application.mapper;
 
-import com.imat.oncomedica.inventory_management.application.dto.CreateMaintenanceRequest;
-import com.imat.oncomedica.inventory_management.application.dto.MaintenanceResponse;
-import com.imat.oncomedica.inventory_management.application.dto.UpdateMaintenanceRequest;
+import com.imat.oncomedica.inventory_management.application.dto.maintenance.CreateMaintenanceRequest;
+import com.imat.oncomedica.inventory_management.application.dto.maintenance.MaintenanceResponse;
+import com.imat.oncomedica.inventory_management.application.dto.maintenance.UpdateMaintenanceRequest;
 import com.imat.oncomedica.inventory_management.domain.entity.Equipment;
 import com.imat.oncomedica.inventory_management.domain.entity.Maintenance;
 import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceStaff;

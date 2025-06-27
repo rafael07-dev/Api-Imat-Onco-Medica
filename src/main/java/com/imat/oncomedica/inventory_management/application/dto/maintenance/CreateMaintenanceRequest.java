@@ -1,4 +1,4 @@
-package com.imat.oncomedica.inventory_management.application.dto;
+package com.imat.oncomedica.inventory_management.application.dto.maintenance;
 
 import lombok.Data;
 import java.time.LocalDateTime;
