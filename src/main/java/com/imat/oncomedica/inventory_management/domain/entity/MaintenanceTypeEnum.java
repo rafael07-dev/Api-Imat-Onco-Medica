@@ -1,6 +1,6 @@
 package com.imat.oncomedica.inventory_management.domain.entity;
 
-public enum MaintenanceType {
+public enum MaintenanceTypeEnum {
     MC,
     MP,
     CA,
