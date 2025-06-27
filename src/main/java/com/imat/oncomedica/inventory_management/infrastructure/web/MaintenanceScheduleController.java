@@ -1,9 +1,10 @@
 package com.imat.oncomedica.inventory_management.infrastructure.web;
 
-import com.imat.oncomedica.inventory_management.application.dto.CreateMaintenanceScheduleRequest;
-import com.imat.oncomedica.inventory_management.application.dto.MaintenanceScheduleResponse;
-import com.imat.oncomedica.inventory_management.application.dto.UpdateMaintenanceScheduleRequest;
+import com.imat.oncomedica.inventory_management.application.dto.schedule.CreateMaintenanceScheduleRequest;
+import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleResponse;
+import com.imat.oncomedica.inventory_management.application.dto.schedule.UpdateMaintenanceScheduleRequest;
 import com.imat.oncomedica.inventory_management.application.service.MaintenanceScheduleServiceImpl;
+import com.imat.oncomedica.inventory_management.application.usecase.CreateMaintenanceScheduleUseCase;
 import com.imat.oncomedica.inventory_management.domain.service.MaintenanceScheduleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,11 @@ import java.util.List;
 public class MaintenanceScheduleController {
 
     private final MaintenanceScheduleService maintenanceScheduleService;
+    private final CreateMaintenanceScheduleUseCase createMaintenanceScheduleUseCase;
 
-    public MaintenanceScheduleController(MaintenanceScheduleServiceImpl maintenanceScheduleServiceImpl) {
+    public MaintenanceScheduleController(MaintenanceScheduleServiceImpl maintenanceScheduleServiceImpl, CreateMaintenanceScheduleUseCase createMaintenanceScheduleUseCase) {
         this.maintenanceScheduleService = maintenanceScheduleServiceImpl;
+        this.createMaintenanceScheduleUseCase = createMaintenanceScheduleUseCase;
     }
 
     @GetMapping("/")
@@ -32,7 +35,7 @@ public class MaintenanceScheduleController {
 
     @PostMapping("/create")
     public ResponseEntity<MaintenanceScheduleResponse> save(@RequestBody CreateMaintenanceScheduleRequest request) {
-        var maintenanceCreated = maintenanceScheduleService.createMaintenanceSchedule(request);
+        var maintenanceCreated = createMaintenanceScheduleUseCase.execute(request);
         return ResponseEntity.created(URI.create("/api/schedule/" + maintenanceCreated.getId()))
                 .body(maintenanceCreated);
     }
