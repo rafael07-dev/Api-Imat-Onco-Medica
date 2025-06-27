@@ -1,4 +1,4 @@
-package com.imat.oncomedica.inventory_management.application.dto;
+package com.imat.oncomedica.inventory_management.application.dto.schedule;
 
 import lombok.Data;
 import java.util.List;
@@ -7,5 +7,5 @@ import java.util.List;
 public class CreateMaintenanceScheduleRequest {
     private Integer equipmentId;
     private Integer maintenanceStaffId;
-    private List<CreateMonthlyMaintenanceRequest> months;
+    private List<CreateMonthlyMaintenanceRequest> monthlyMaintenances;
 }
