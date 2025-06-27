@@ -4,7 +4,7 @@ import com.imat.oncomedica.inventory_management.application.builder.MaintenanceS
 import com.imat.oncomedica.inventory_management.application.dto.schedule.CreateMaintenanceScheduleRequest;
 import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleResponse;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceScheduleMapper;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.EquipmentRepository;
+import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceScheduleAlreadyExistsException;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceScheduleRepository;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +15,7 @@ public class CreateMaintenanceScheduleUseCase {
     private final MaintenanceScheduleMapper maintenanceScheduleMapper;
     private final MaintenanceScheduleBuilder maintenanceScheduleBuilder;
 
-    public CreateMaintenanceScheduleUseCase(EquipmentRepository equipmentRepository,
-                                            MaintenanceScheduleRepository maintenanceScheduleRepository,
+    public CreateMaintenanceScheduleUseCase(MaintenanceScheduleRepository maintenanceScheduleRepository,
                                             MaintenanceScheduleMapper maintenanceScheduleMapper, MaintenanceScheduleBuilder maintenanceScheduleBuilder) {
         this.maintenanceScheduleRepository = maintenanceScheduleRepository;
         this.maintenanceScheduleMapper = maintenanceScheduleMapper;
@@ -24,6 +23,10 @@ public class CreateMaintenanceScheduleUseCase {
     }
 
     public MaintenanceScheduleResponse execute(CreateMaintenanceScheduleRequest request) {
+
+        if (maintenanceScheduleRepository.findMaintenanceScheduleByEquipmentId(request.getEquipmentId())){
+            throw new MaintenanceScheduleAlreadyExistsException(request.getEquipmentId());
+        }
 
         var maintenanceSchedule =  maintenanceScheduleBuilder.build(request);
 

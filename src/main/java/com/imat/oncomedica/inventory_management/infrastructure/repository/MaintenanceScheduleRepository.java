@@ -4,4 +4,5 @@ import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedul
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MaintenanceScheduleRepository extends JpaRepository<MaintenanceSchedule, Integer> {
+    boolean findMaintenanceScheduleByEquipmentId(Integer equipmentId);
 }
