@@ -1,30 +1,52 @@
 package com.imat.oncomedica.inventory_management.application.mapper;
 
-import com.imat.oncomedica.inventory_management.application.dto.MaintenanceScheduleResponse;
+import com.imat.oncomedica.inventory_management.application.dto.maintenance.MonthlyMaintenanceResponse;
+import com.imat.oncomedica.inventory_management.application.dto.maintenance.MonthlyMaintenanceTypeResponse;
+import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleResponse;
 import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedule;
-import com.imat.oncomedica.inventory_management.domain.entity.MonthlyMaintenance;
 import org.mapstruct.Mapper;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MaintenanceScheduleMapper {
 
-    default List<MaintenanceScheduleResponse> toMaintenanceScheduleList(List<MaintenanceSchedule> maintenanceSchedules, List<MonthlyMaintenance> maintenances){
-        List<MaintenanceScheduleResponse> maintenanceScheduleResponses = new ArrayList<>();
+    default MaintenanceScheduleResponse buildMaintenanceScheduleResponse(MaintenanceSchedule maintenanceSchedule){
+        MaintenanceScheduleResponse maintenanceScheduleResponse = new MaintenanceScheduleResponse();
 
-        maintenanceSchedules.forEach(m -> {
-            var ms = new MaintenanceScheduleResponse(
-                    m.getId(),
-                    m.getEquipment(),
-                    m.getResponsible(),
-                    maintenances
-            );
+        maintenanceScheduleResponse.setId(maintenanceSchedule.getId());
+        maintenanceScheduleResponse.setEquipment(maintenanceSchedule.getEquipment());
+        maintenanceScheduleResponse.setResponsible(maintenanceSchedule.getResponsible());
 
-            maintenanceScheduleResponses.add(ms);
-        });
-        return maintenanceScheduleResponses;
+        List<MonthlyMaintenanceResponse> monthlyMaintenanceResponseList = new ArrayList<>();
+
+         maintenanceSchedule.getMonthlyMaintenances()
+                .stream()
+                .forEach(mm -> {
+                    var maintenanceResponse = new MonthlyMaintenanceResponse();
+
+                    maintenanceResponse.setMonth(mm.getMonth());
+                    maintenanceResponse.setYear(mm.getYear());
+
+                    List<MonthlyMaintenanceTypeResponse> monthlyMaintenanceTypeResponses = new ArrayList<>();
+
+                    mm.getMaintenanceTypes()
+                            .stream()
+                            .forEach(mmt -> {
+                                var maintenanceTypeResponse = new MonthlyMaintenanceTypeResponse();
+                                maintenanceTypeResponse.setQuantity(mmt.getQuantity());
+
+                                var maintenanceType = mmt.getMaintenanceTypeEnum().toString();
+                                maintenanceTypeResponse.setMaintenanceType(maintenanceType);
+
+                                monthlyMaintenanceTypeResponses.add(maintenanceTypeResponse);
+                            });
+                    maintenanceResponse.setMaintenances(monthlyMaintenanceTypeResponses);
+                    monthlyMaintenanceResponseList.add(maintenanceResponse);
+                });
+
+        maintenanceScheduleResponse.setMonthlyMaintenances(monthlyMaintenanceResponseList);
+
+        return maintenanceScheduleResponse;
     };
-    MaintenanceScheduleResponse toMaintenanceScheduleResponse(MaintenanceSchedule maintenanceSchedule);
 }
