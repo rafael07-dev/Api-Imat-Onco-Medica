@@ -15,27 +15,18 @@ public class MaintenanceScheduleServiceImpl implements MaintenanceScheduleServic
 
     private final MaintenanceScheduleRepository maintenanceScheduleRepository;
     private final MaintenanceScheduleMapper maintenanceScheduleMapper;
-    /*
-    * An array of months to compare
-    */
-    private static final String [] MONTHS = {
-            "January", "February", "March", "April",
-            "May", "June", "July", "August",
-            "September", "October", "November", "December"
-    };
 
     public MaintenanceScheduleServiceImpl(MaintenanceScheduleRepository maintenanceScheduleRepository, MaintenanceScheduleMapper maintenanceScheduleMapper) {
         this.maintenanceScheduleRepository = maintenanceScheduleRepository;
         this.maintenanceScheduleMapper = maintenanceScheduleMapper;
     }
 
-
     @Override
     public List<MaintenanceScheduleResponse> getAllMaintenanceSchedules() {
         List<MaintenanceSchedule> maintenanceSchedules = maintenanceScheduleRepository.findAll();
 
         return maintenanceSchedules.stream()
-                .map(m -> maintenanceScheduleMapper.buildMaintenanceScheduleResponse(m))
+                .map(maintenanceScheduleMapper::buildMaintenanceScheduleResponse)
                 .toList();
     }
 
