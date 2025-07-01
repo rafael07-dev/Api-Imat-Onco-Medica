@@ -1,2 +1,9 @@
-package com.imat.oncomedica.inventory_management.application.builder;public interface MaintenanceScheduleBuilderStrategy {
+package com.imat.oncomedica.inventory_management.application.builder;
+
+import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleRequest;
+import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedule;
+
+public interface MaintenanceScheduleBuilderStrategy {
+
+    MaintenanceSchedule build(MaintenanceScheduleRequest request);
 }
