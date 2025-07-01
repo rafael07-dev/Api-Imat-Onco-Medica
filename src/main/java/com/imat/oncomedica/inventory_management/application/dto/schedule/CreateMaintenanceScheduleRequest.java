@@ -1,11 +1,5 @@
 package com.imat.oncomedica.inventory_management.application.dto.schedule;
 
-import lombok.Data;
-import java.util.List;
+public class CreateMaintenanceScheduleRequest extends MaintenanceScheduleRequest {
 
-@Data
-public class CreateMaintenanceScheduleRequest {
-    private Integer equipmentId;
-    private Integer maintenanceStaffId;
-    private List<CreateMonthlyMaintenanceRequest> monthlyMaintenances;
 }

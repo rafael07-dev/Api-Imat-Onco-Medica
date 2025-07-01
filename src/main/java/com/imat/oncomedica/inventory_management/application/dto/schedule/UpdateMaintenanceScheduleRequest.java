@@ -1,4 +1,5 @@
 package com.imat.oncomedica.inventory_management.application.dto.schedule;
 
-public class UpdateMaintenanceScheduleRequest {
+public class UpdateMaintenanceScheduleRequest extends MaintenanceScheduleRequest {
+
 }
