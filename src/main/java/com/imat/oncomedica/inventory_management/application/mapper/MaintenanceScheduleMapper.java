@@ -21,7 +21,6 @@ public interface MaintenanceScheduleMapper {
         List<MonthlyMaintenanceResponse> monthlyMaintenanceResponseList = new ArrayList<>();
 
          maintenanceSchedule.getMonthlyMaintenances()
-                .stream()
                 .forEach(mm -> {
                     var maintenanceResponse = new MonthlyMaintenanceResponse();
 
@@ -31,7 +30,6 @@ public interface MaintenanceScheduleMapper {
                     List<MonthlyMaintenanceTypeResponse> monthlyMaintenanceTypeResponses = new ArrayList<>();
 
                     mm.getMaintenanceTypes()
-                            .stream()
                             .forEach(mmt -> {
                                 var maintenanceTypeResponse = new MonthlyMaintenanceTypeResponse();
                                 maintenanceTypeResponse.setQuantity(mmt.getQuantity());
