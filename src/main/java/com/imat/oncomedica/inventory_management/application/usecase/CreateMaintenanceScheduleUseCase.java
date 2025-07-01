@@ -1,6 +1,6 @@
 package com.imat.oncomedica.inventory_management.application.usecase;
 
-import com.imat.oncomedica.inventory_management.application.builder.MaintenanceScheduleBuilder;
+import com.imat.oncomedica.inventory_management.application.builder.CreateMaintenanceScheduleBuilder;
 import com.imat.oncomedica.inventory_management.application.dto.schedule.CreateMaintenanceScheduleRequest;
 import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleResponse;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceScheduleMapper;
@@ -13,22 +13,22 @@ public class CreateMaintenanceScheduleUseCase {
 
     private final MaintenanceScheduleRepository maintenanceScheduleRepository;
     private final MaintenanceScheduleMapper maintenanceScheduleMapper;
-    private final MaintenanceScheduleBuilder maintenanceScheduleBuilder;
+    private final CreateMaintenanceScheduleBuilder createMaintenanceScheduleBuilder;
 
     public CreateMaintenanceScheduleUseCase(MaintenanceScheduleRepository maintenanceScheduleRepository,
-                                            MaintenanceScheduleMapper maintenanceScheduleMapper, MaintenanceScheduleBuilder maintenanceScheduleBuilder) {
+                                            MaintenanceScheduleMapper maintenanceScheduleMapper, CreateMaintenanceScheduleBuilder createMaintenanceScheduleBuilder) {
         this.maintenanceScheduleRepository = maintenanceScheduleRepository;
         this.maintenanceScheduleMapper = maintenanceScheduleMapper;
-        this.maintenanceScheduleBuilder = maintenanceScheduleBuilder;
+        this.createMaintenanceScheduleBuilder = createMaintenanceScheduleBuilder;
     }
 
     public MaintenanceScheduleResponse execute(CreateMaintenanceScheduleRequest request) {
 
-        if (maintenanceScheduleRepository.findMaintenanceScheduleByEquipmentId(request.getEquipmentId())){
+        if (maintenanceScheduleRepository.findMaintenanceScheduleByEquipment_Id(request.getEquipmentId()).isPresent()){
             throw new MaintenanceScheduleAlreadyExistsException(request.getEquipmentId());
         }
 
-        var maintenanceSchedule =  maintenanceScheduleBuilder.build(request);
+        var maintenanceSchedule =  createMaintenanceScheduleBuilder.build(request);
 
         var maintenanceSaved = maintenanceScheduleRepository.save(maintenanceSchedule);
 
