@@ -5,6 +5,7 @@ import com.imat.oncomedica.inventory_management.application.dto.schedule.Mainten
 import com.imat.oncomedica.inventory_management.application.dto.schedule.UpdateMaintenanceScheduleRequest;
 import com.imat.oncomedica.inventory_management.application.service.MaintenanceScheduleServiceImpl;
 import com.imat.oncomedica.inventory_management.application.usecase.CreateMaintenanceScheduleUseCase;
+import com.imat.oncomedica.inventory_management.application.usecase.UpdateMaintenanceScheduleUseCase;
 import com.imat.oncomedica.inventory_management.domain.service.MaintenanceScheduleService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +18,12 @@ public class MaintenanceScheduleController {
 
     private final MaintenanceScheduleService maintenanceScheduleService;
     private final CreateMaintenanceScheduleUseCase createMaintenanceScheduleUseCase;
+    private final UpdateMaintenanceScheduleUseCase updateMaintenanceScheduleUseCase;
 
-    public MaintenanceScheduleController(MaintenanceScheduleServiceImpl maintenanceScheduleServiceImpl, CreateMaintenanceScheduleUseCase createMaintenanceScheduleUseCase) {
+    public MaintenanceScheduleController(MaintenanceScheduleServiceImpl maintenanceScheduleServiceImpl, CreateMaintenanceScheduleUseCase createMaintenanceScheduleUseCase, UpdateMaintenanceScheduleUseCase updateMaintenanceScheduleUseCase) {
         this.maintenanceScheduleService = maintenanceScheduleServiceImpl;
         this.createMaintenanceScheduleUseCase = createMaintenanceScheduleUseCase;
+        this.updateMaintenanceScheduleUseCase = updateMaintenanceScheduleUseCase;
     }
 
     @GetMapping("/")
@@ -40,9 +43,9 @@ public class MaintenanceScheduleController {
                 .body(maintenanceCreated);
     }
 
-    @PatchMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<MaintenanceScheduleResponse> update(@RequestBody UpdateMaintenanceScheduleRequest request, @PathVariable Integer id) {
-        return ResponseEntity.ok(maintenanceScheduleService.updateMaintenanceSchedule (request, id));
+        return ResponseEntity.ok(updateMaintenanceScheduleUseCase.execute(request, id));
     }
 
     @DeleteMapping("/delete/{id}")

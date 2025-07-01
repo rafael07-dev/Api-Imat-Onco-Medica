@@ -1,8 +1,9 @@
 package com.imat.oncomedica.inventory_management.application.builder;
 
 import com.imat.oncomedica.inventory_management.application.dto.maintenance.CreateMonthlyMaintenanceTypeRequest;
-import com.imat.oncomedica.inventory_management.application.dto.schedule.CreateMaintenanceScheduleRequest;
 import com.imat.oncomedica.inventory_management.application.dto.schedule.CreateMonthlyMaintenanceRequest;
+import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleRequest;
+import com.imat.oncomedica.inventory_management.application.dto.schedule.UpdateMaintenanceScheduleRequest;
 import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedule;
 import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceTypeEnum;
 import com.imat.oncomedica.inventory_management.domain.entity.MonthlyMaintenance;
@@ -23,35 +24,38 @@ public class MaintenanceScheduleBuilder {
     private final EquipmentRepository equipmentRepository;
     private final MaintenanceStaffRepository maintenanceStaffRepository;
 
-    public MaintenanceScheduleBuilder(EquipmentRepository equipmentRepository, MaintenanceStaffRepository maintenanceStaffRepository) {
+    public MaintenanceScheduleBuilder(EquipmentRepository equipmentRepository,
+                                      MaintenanceStaffRepository maintenanceStaffRepository) {
+
         this.equipmentRepository = equipmentRepository;
         this.maintenanceStaffRepository = maintenanceStaffRepository;
     }
 
 
-    public MaintenanceSchedule build(CreateMaintenanceScheduleRequest request) {
+    public MaintenanceSchedule build(MaintenanceScheduleRequest request) {
+        
         MaintenanceSchedule maintenanceSchedule = new MaintenanceSchedule();
 
-         var equipment = equipmentRepository.findById(request.getEquipmentId())
-                 .orElseThrow(() -> new EquipmentNotFoundException(request.getEquipmentId()));
+        var equipment = equipmentRepository.findById(request.getEquipmentId())
+                .orElseThrow(() -> new EquipmentNotFoundException(request.getEquipmentId()));
 
-         var staff = maintenanceStaffRepository.findById(request.getMaintenanceStaffId())
-                 .orElseThrow(() -> new MaintenanceStaffNotFound(request.getMaintenanceStaffId()));
+        var staff = maintenanceStaffRepository.findById(request.getMaintenanceStaffId())
+                .orElseThrow(() -> new MaintenanceStaffNotFound(request.getMaintenanceStaffId()));
 
-         maintenanceSchedule.setEquipment(equipment);
-         maintenanceSchedule.setResponsible(staff);
+        maintenanceSchedule.setEquipment(equipment);
+        maintenanceSchedule.setResponsible(staff);
 
-         if (request.getMonthlyMaintenances() == null || request.getMonthlyMaintenances().isEmpty()) {
-             throw new MonthlyMaintenanceNotFoundException("should have at least one maintenance");
-         }
+        if (request.getMonthlyMaintenances() == null || request.getMonthlyMaintenances().isEmpty()) {
+            throw new MonthlyMaintenanceNotFoundException("should have at least one maintenance");
+        }
 
-         var monthlyMaintenances = getMonthlyMaintenances(request.getMonthlyMaintenances());
+        var monthlyMaintenances = getMonthlyMaintenances(request.getMonthlyMaintenances());
 
-         associateMonthlyMaintenanceToSchedule(monthlyMaintenances, maintenanceSchedule);
+        associateMonthlyMaintenanceToSchedule(monthlyMaintenances, maintenanceSchedule);
 
-         maintenanceSchedule.setMonthlyMaintenances(monthlyMaintenances);
+        maintenanceSchedule.setMonthlyMaintenances(monthlyMaintenances);
 
-         return maintenanceSchedule;
+        return maintenanceSchedule;
     }
 
     private List<MonthlyMaintenance> getMonthlyMaintenances(List<CreateMonthlyMaintenanceRequest> requests) {
