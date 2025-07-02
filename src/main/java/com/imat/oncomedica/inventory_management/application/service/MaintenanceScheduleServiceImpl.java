@@ -1,7 +1,6 @@
 package com.imat.oncomedica.inventory_management.application.service;
 
 import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleResponse;
-import com.imat.oncomedica.inventory_management.application.dto.schedule.UpdateMaintenanceScheduleRequest;
 import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedule;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceScheduleMapper;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceScheduleNotFoundException;
@@ -39,8 +38,27 @@ public class MaintenanceScheduleServiceImpl implements MaintenanceScheduleServic
     }
 
     @Override
-    public MaintenanceScheduleResponse updateMaintenanceSchedule(UpdateMaintenanceScheduleRequest maintenanceSchedule, Integer id) {
-        return null;
+    public List<MaintenanceScheduleResponse> getMaintenanceScheduleByYear(Integer year) {
+        var maintenanceScheduleList = maintenanceScheduleRepository.findByYear(year);
+
+        if (maintenanceScheduleList.isEmpty())
+            throw new MaintenanceScheduleNotFoundException("there is no maintenances for this year");
+
+        var copyMaintenanceScheduleList = maintenanceScheduleList
+                .stream()
+                .map(maintenanceScheduleMapper::buildMaintenanceScheduleResponse)
+                .toList();
+
+        return copyMaintenanceScheduleList.stream()
+                .map(schedule -> {
+                    var filteredMonthlyMaintenance = schedule.getMonthlyMaintenances()
+                            .stream()
+                            .filter(maintenanceSchedule -> maintenanceSchedule.getYear().equals(year))
+                            .toList();
+
+                    schedule.setMonthlyMaintenances(filteredMonthlyMaintenance);
+                    return schedule;
+                }).toList();
     }
 
     @Override

@@ -8,4 +8,8 @@ public class MaintenanceScheduleNotFoundException extends RuntimeException {
     public MaintenanceScheduleNotFoundException(Integer id) {
         super("Maintenance schedule not found with id " + id);
     }
+
+    public MaintenanceScheduleNotFoundException(String message) {
+        super(message);
+    }
 }

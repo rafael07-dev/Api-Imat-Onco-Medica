@@ -36,6 +36,11 @@ public class MaintenanceScheduleController {
         return ResponseEntity.ok().body(maintenanceScheduleService.getMaintenanceScheduleById(id));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<MaintenanceScheduleResponse>> getMaintenanceScheduleByYear(@RequestParam(required = false) Integer year) {
+        return ResponseEntity.ok().body(maintenanceScheduleService.getMaintenanceScheduleByYear(year));
+    }
+
     @PostMapping("/create")
     public ResponseEntity<MaintenanceScheduleResponse> save(@RequestBody CreateMaintenanceScheduleRequest request) {
         var maintenanceCreated = createMaintenanceScheduleUseCase.execute(request);
