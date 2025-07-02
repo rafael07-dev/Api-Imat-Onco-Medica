@@ -36,7 +36,7 @@ public class MaintenanceScheduleController {
         return ResponseEntity.ok().body(maintenanceScheduleService.getMaintenanceScheduleById(id));
     }
 
-    @GetMapping("/search")
+    @GetMapping("/filter")
     public ResponseEntity<List<MaintenanceScheduleResponse>> getMaintenanceScheduleByYear(@RequestParam(required = false) Integer year) {
         return ResponseEntity.ok().body(maintenanceScheduleService.getMaintenanceScheduleByYear(year));
     }
