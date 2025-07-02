@@ -6,6 +6,7 @@ import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedul
 import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceTypeEnum;
 import com.imat.oncomedica.inventory_management.domain.entity.MonthlyMaintenance;
 import com.imat.oncomedica.inventory_management.domain.entity.MonthlyMaintenanceType;
+import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceTypeNotAllowedException;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceTypeNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class MaintenanceScheduleBuilderHelper {
                     var maintenanceTypeEnum = MaintenanceTypeEnum.valueOf(maintenanceType);
                     monthlyMaintenanceTypeEntity.setMaintenanceTypeEnum(maintenanceTypeEnum);
                 }catch (IllegalArgumentException e){
-                    throw new MaintenanceTypeNotFoundException();
+                    throw new MaintenanceTypeNotAllowedException();
                 }
 
                 monthlyMaintenanceTypeEntity.setMonthlyMaintenance(monthlyMaintenance);

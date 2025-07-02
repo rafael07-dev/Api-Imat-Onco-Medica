@@ -1,6 +1,7 @@
 package com.imat.oncomedica.inventory_management.infrastructure.web;
 
 import com.imat.oncomedica.inventory_management.domain.exception.EquipmentNotFoundException;
+import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceTypeNotAllowedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,4 +23,15 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
+    @ExceptionHandler(MaintenanceTypeNotAllowedException.class)
+    public ResponseEntity<ErrorResponse> maintenanceTypeNotAllowedException(MaintenanceTypeNotAllowedException e) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                HttpStatus.CONFLICT.value(),
+                "Maintenance type no allowed",
+                e.getMessage(),
+                LocalDateTime.now()
+        );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
 }
