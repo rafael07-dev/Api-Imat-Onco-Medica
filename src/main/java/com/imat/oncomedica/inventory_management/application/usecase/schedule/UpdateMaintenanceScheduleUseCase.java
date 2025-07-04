@@ -1,14 +1,11 @@
-package com.imat.oncomedica.inventory_management.application.usecase;
+package com.imat.oncomedica.inventory_management.application.usecase.schedule;
 
 import com.imat.oncomedica.inventory_management.application.builder.UpdateMaintenanceScheduleBuilder;
 import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleResponse;
 import com.imat.oncomedica.inventory_management.application.dto.schedule.UpdateMaintenanceScheduleRequest;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceScheduleMapper;
-import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceScheduleNotFoundException;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceScheduleRepository;
-import org.springframework.stereotype.Component;
+import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceScheduleRepository;
 
-@Component
 public class UpdateMaintenanceScheduleUseCase {
 
     private final UpdateMaintenanceScheduleBuilder updateMaintenanceScheduleBuilder;
@@ -23,10 +20,6 @@ public class UpdateMaintenanceScheduleUseCase {
 
 
     public MaintenanceScheduleResponse execute(UpdateMaintenanceScheduleRequest request, Integer id) {
-
-        if (!maintenanceScheduleRepository.existsById(id)) {
-            throw new MaintenanceScheduleNotFoundException(id);
-        }
 
         var maintenanceSchedule = updateMaintenanceScheduleBuilder.build(request, id);
 

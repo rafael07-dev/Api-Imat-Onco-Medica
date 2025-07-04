@@ -1,14 +1,12 @@
-package com.imat.oncomedica.inventory_management.application.usecase;
+package com.imat.oncomedica.inventory_management.application.usecase.schedule;
 
 import com.imat.oncomedica.inventory_management.application.builder.CreateMaintenanceScheduleBuilder;
 import com.imat.oncomedica.inventory_management.application.dto.schedule.CreateMaintenanceScheduleRequest;
 import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleResponse;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceScheduleMapper;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceScheduleAlreadyExistsException;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceScheduleRepository;
-import org.springframework.stereotype.Component;
+import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceScheduleRepository;
 
-@Component
 public class CreateMaintenanceScheduleUseCase {
 
     private final MaintenanceScheduleRepository maintenanceScheduleRepository;
@@ -16,7 +14,9 @@ public class CreateMaintenanceScheduleUseCase {
     private final CreateMaintenanceScheduleBuilder createMaintenanceScheduleBuilder;
 
     public CreateMaintenanceScheduleUseCase(MaintenanceScheduleRepository maintenanceScheduleRepository,
-                                            MaintenanceScheduleMapper maintenanceScheduleMapper, CreateMaintenanceScheduleBuilder createMaintenanceScheduleBuilder) {
+                                            MaintenanceScheduleMapper maintenanceScheduleMapper,
+                                            CreateMaintenanceScheduleBuilder createMaintenanceScheduleBuilder) {
+
         this.maintenanceScheduleRepository = maintenanceScheduleRepository;
         this.maintenanceScheduleMapper = maintenanceScheduleMapper;
         this.createMaintenanceScheduleBuilder = createMaintenanceScheduleBuilder;
@@ -24,7 +24,7 @@ public class CreateMaintenanceScheduleUseCase {
 
     public MaintenanceScheduleResponse execute(CreateMaintenanceScheduleRequest request) {
 
-        if (maintenanceScheduleRepository.findMaintenanceScheduleByEquipment_Id(request.getEquipmentId()).isPresent()){
+        if (maintenanceScheduleRepository.findByEquipmentId(request.getEquipmentId()).isEmpty()){
             throw new MaintenanceScheduleAlreadyExistsException(request.getEquipmentId());
         }
 

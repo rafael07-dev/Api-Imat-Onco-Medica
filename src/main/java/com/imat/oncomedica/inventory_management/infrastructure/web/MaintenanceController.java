@@ -42,7 +42,7 @@ public class MaintenanceController {
 
     @GetMapping("/equipment/{equipmentId}")
     public ResponseEntity<List<MaintenanceResponse>> getMaintenancesByEquipmentId(@PathVariable Integer equipmentId) {
-        return ResponseEntity.ok().body(getMaintenanceByEquipmentIdUseCase.execute(equipmentId))
+        return ResponseEntity.ok().body(getMaintenanceByEquipmentIdUseCase.execute(equipmentId));
     }
 
     @GetMapping("/{maintenanceStaffId}")

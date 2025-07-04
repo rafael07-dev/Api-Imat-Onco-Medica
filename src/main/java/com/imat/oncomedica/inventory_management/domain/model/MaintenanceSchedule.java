@@ -11,6 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 public class MaintenanceSchedule implements Serializable {
 
+    private Integer id;
+
     private Equipment equipment;
 
     private MaintenanceStaff responsible;

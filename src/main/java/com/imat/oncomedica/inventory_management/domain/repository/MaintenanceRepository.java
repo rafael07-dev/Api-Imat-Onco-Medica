@@ -10,7 +10,6 @@ public interface MaintenanceRepository {
     Optional<Maintenance> findById(Integer id);
     Maintenance save(Maintenance maintenance);
     Maintenance delete(Maintenance maintenance);
-
     List<Maintenance> findByEquipmentId(Integer equipmentId);
     List<Maintenance> findByMaintenanceStaffId(Integer maintenanceStaffId);
     Maintenance findByMaintenanceStaffFirstName(String name);

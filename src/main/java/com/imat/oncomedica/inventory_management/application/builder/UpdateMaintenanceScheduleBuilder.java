@@ -7,12 +7,9 @@ import com.imat.oncomedica.inventory_management.domain.model.MaintenanceSchedule
 import com.imat.oncomedica.inventory_management.domain.model.MonthlyMaintenance;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceScheduleNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.exception.MonthlyMaintenanceNotFoundException;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceScheduleRepository;
-import org.springframework.stereotype.Component;
-
+import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceScheduleRepository;
 import java.util.List;
 
-@Component
 public class UpdateMaintenanceScheduleBuilder {
 
     private final MaintenanceScheduleRepository maintenanceScheduleRepository;

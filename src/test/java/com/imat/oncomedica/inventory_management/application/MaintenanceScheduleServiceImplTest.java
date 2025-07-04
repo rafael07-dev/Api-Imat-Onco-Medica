@@ -10,7 +10,7 @@ import com.imat.oncomedica.inventory_management.domain.model.MaintenanceTypeEnum
 import com.imat.oncomedica.inventory_management.domain.model.MonthlyMaintenance;
 import com.imat.oncomedica.inventory_management.domain.model.MonthlyMaintenanceType;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceScheduleNotFoundException;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceScheduleRepository;
+import com.imat.oncomedica.inventory_management.infrastructure.persistence.repository.SpringDataMaintenanceScheduleRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
 public class MaintenanceScheduleServiceImplTest {
 
     @Mock
-    private MaintenanceScheduleRepository repository;
+    private SpringDataMaintenanceScheduleRepository repository;
 
     @Mock
     private MaintenanceScheduleMapper mapper;

@@ -7,28 +7,21 @@ import com.imat.oncomedica.inventory_management.domain.model.OrderStatus;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceStaffNotFound;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.report.OrderPdfGenerator;
-import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.OrderRepository;
 
 public class CompleteMaintenanceUseCase {
 
-    private final MaintenanceStaffRepository maintenanceStaffRepository;
     private final MaintenanceRepository maintenanceRepository;
     private final MaintenanceMapper maintenanceMapper;
-    private final EquipmentRepository equipmentRepository;
     private final OrderPdfGenerator orderPdfGenerator;
     private final OrderRepository orderRepository;
 
-    public CompleteMaintenanceUseCase(MaintenanceStaffRepository maintenanceStaffRepository, MaintenanceRepository maintenanceRepository, MaintenanceMapper maintenanceMapper, EquipmentRepository equipmentRepository, OrderPdfGenerator orderPdfGenerator, OrderRepository orderRepository) {
-        this.maintenanceStaffRepository = maintenanceStaffRepository;
+    public CompleteMaintenanceUseCase(MaintenanceRepository maintenanceRepository, MaintenanceMapper maintenanceMapper, OrderPdfGenerator orderPdfGenerator, OrderRepository orderRepository) {
         this.maintenanceRepository = maintenanceRepository;
         this.maintenanceMapper = maintenanceMapper;
-        this.equipmentRepository = equipmentRepository;
         this.orderPdfGenerator = orderPdfGenerator;
         this.orderRepository = orderRepository;
     }
-
 
     public MaintenanceResponse execute(UpdateMaintenanceRequest request, Integer maintenanceId) {
 

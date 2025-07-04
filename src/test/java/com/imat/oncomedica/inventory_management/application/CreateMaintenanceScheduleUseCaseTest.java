@@ -6,11 +6,11 @@ import com.imat.oncomedica.inventory_management.application.dto.schedule.CreateM
 import com.imat.oncomedica.inventory_management.application.dto.schedule.CreateMonthlyMaintenanceRequest;
 import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleResponse;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceScheduleMapper;
-import com.imat.oncomedica.inventory_management.application.usecase.CreateMaintenanceScheduleUseCase;
+import com.imat.oncomedica.inventory_management.application.usecase.schedule.CreateMaintenanceScheduleUseCase;
 import com.imat.oncomedica.inventory_management.domain.model.MaintenanceSchedule;
 import com.imat.oncomedica.inventory_management.domain.model.MaintenanceTypeEnum;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceScheduleAlreadyExistsException;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceScheduleRepository;
+import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceScheduleRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -80,12 +80,12 @@ public class CreateMaintenanceScheduleUseCaseTest {
         CreateMaintenanceScheduleRequest request = new CreateMaintenanceScheduleRequest();
         request.setEquipmentId(id);
 
-        when(repository.findMaintenanceScheduleByEquipment_Id(id)).thenReturn(Optional.of(new MaintenanceSchedule()));
+        when(repository.findByEquipmentId(id)).thenReturn(Optional.of(new MaintenanceSchedule()));
 
         assertThrows(MaintenanceScheduleAlreadyExistsException.class,
                 () -> useCase.execute(request));
 
-        verify(repository).findMaintenanceScheduleByEquipment_Id(id);
+        verify(repository).findByEquipmentId(id);
         verify(repository, never()).save(any());
         verify(mapper, never()).buildMaintenanceScheduleResponse(any());
     }

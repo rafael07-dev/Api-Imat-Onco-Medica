@@ -3,9 +3,11 @@ package com.imat.oncomedica.inventory_management.infrastructure.persistence.repo
 import com.imat.oncomedica.inventory_management.domain.model.Maintenance;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.persistence.mapper.MaintenancePersistenceMapper;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class MaintenanceRepositoryImpl implements MaintenanceRepository {
 
     private final SpringDataMaintenanceRepository managementRepository;

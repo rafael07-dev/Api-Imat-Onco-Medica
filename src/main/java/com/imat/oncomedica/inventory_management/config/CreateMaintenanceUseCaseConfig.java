@@ -3,6 +3,7 @@ package com.imat.oncomedica.inventory_management.config;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceMapper;
 import com.imat.oncomedica.inventory_management.application.usecase.maintenance.CreateMaintenanceUseCase;
 import com.imat.oncomedica.inventory_management.application.usecase.CreateOrderUseCase;
+import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceRepository;
 import com.imat.oncomedica.inventory_management.domain.service.NotificationService;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.persistence.repository.SpringDataMaintenanceRepository;
@@ -15,14 +16,14 @@ public class CreateMaintenanceUseCaseConfig {
 
     @Bean
     public CreateMaintenanceUseCase createMaintenanceUseCase(
-            SpringDataMaintenanceRepository springDataMaintenanceRepository,
+            MaintenanceRepository maintenanceRepository,
             EquipmentRepository equipmentRepository,
             MaintenanceStaffRepository maintenanceStaffRepository,
             MaintenanceMapper maintenanceMapper,
             NotificationService notificationService,
             CreateOrderUseCase createOrderUseCase) {
         return new CreateMaintenanceUseCase(
-                springDataMaintenanceRepository,
+                maintenanceRepository,
                 equipmentRepository,
                 maintenanceStaffRepository,
                 maintenanceMapper,
