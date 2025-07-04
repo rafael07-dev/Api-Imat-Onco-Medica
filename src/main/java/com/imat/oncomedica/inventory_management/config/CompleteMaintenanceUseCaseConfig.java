@@ -4,7 +4,7 @@ import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceMa
 import com.imat.oncomedica.inventory_management.application.usecase.maintenance.CompleteMaintenanceUseCase;
 import com.imat.oncomedica.inventory_management.infrastructure.report.OrderPdfGenerator;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceRepository;
+import com.imat.oncomedica.inventory_management.infrastructure.persistence.repository.SpringDataMaintenanceRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.OrderRepository;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +16,7 @@ public class CompleteMaintenanceUseCaseConfig {
     @Bean
     public CompleteMaintenanceUseCase completeMaintenanceUseCase (
             MaintenanceStaffRepository maintenanceStaffRepository,
-            MaintenanceRepository maintenanceRepository,
+            SpringDataMaintenanceRepository springDataMaintenanceRepository,
             MaintenanceMapper maintenanceMapper,
             EquipmentRepository equipmentRepository,
             OrderPdfGenerator orderPdfGenerator,
@@ -24,7 +24,7 @@ public class CompleteMaintenanceUseCaseConfig {
     ) {
         return new CompleteMaintenanceUseCase(
                 maintenanceStaffRepository,
-                maintenanceRepository,
+                springDataMaintenanceRepository,
                 maintenanceMapper,
                 equipmentRepository,
                 orderPdfGenerator,

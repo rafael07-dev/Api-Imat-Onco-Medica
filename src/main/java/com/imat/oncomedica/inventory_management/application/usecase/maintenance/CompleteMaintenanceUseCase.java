@@ -7,22 +7,22 @@ import com.imat.oncomedica.inventory_management.domain.model.OrderStatus;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceStaffNotFound;
 import com.imat.oncomedica.inventory_management.infrastructure.report.OrderPdfGenerator;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceRepository;
+import com.imat.oncomedica.inventory_management.infrastructure.persistence.repository.SpringDataMaintenanceRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.OrderRepository;
 
 public class CompleteMaintenanceUseCase {
 
     private final MaintenanceStaffRepository maintenanceStaffRepository;
-    private final MaintenanceRepository maintenanceRepository;
+    private final SpringDataMaintenanceRepository springDataMaintenanceRepository;
     private final MaintenanceMapper maintenanceMapper;
     private final EquipmentRepository equipmentRepository;
     private final OrderPdfGenerator orderPdfGenerator;
     private final OrderRepository orderRepository;
 
-    public CompleteMaintenanceUseCase(MaintenanceStaffRepository maintenanceStaffRepository, MaintenanceRepository maintenanceRepository, MaintenanceMapper maintenanceMapper, EquipmentRepository equipmentRepository, OrderPdfGenerator orderPdfGenerator, OrderRepository orderRepository) {
+    public CompleteMaintenanceUseCase(MaintenanceStaffRepository maintenanceStaffRepository, SpringDataMaintenanceRepository springDataMaintenanceRepository, MaintenanceMapper maintenanceMapper, EquipmentRepository equipmentRepository, OrderPdfGenerator orderPdfGenerator, OrderRepository orderRepository) {
         this.maintenanceStaffRepository = maintenanceStaffRepository;
-        this.maintenanceRepository = maintenanceRepository;
+        this.springDataMaintenanceRepository = springDataMaintenanceRepository;
         this.maintenanceMapper = maintenanceMapper;
         this.equipmentRepository = equipmentRepository;
         this.orderPdfGenerator = orderPdfGenerator;
@@ -31,7 +31,7 @@ public class CompleteMaintenanceUseCase {
 
     public MaintenanceResponse execute(UpdateMaintenanceRequest request, Integer maintenanceId) {
 
-        var maintenanceEntity = maintenanceRepository.findById(maintenanceId)
+        var maintenanceEntity = springDataMaintenanceRepository.findById(maintenanceId)
                 .orElseThrow(() -> new MaintenanceStaffNotFound(maintenanceId));
 
         maintenanceEntity.setDone(true);
@@ -41,7 +41,7 @@ public class CompleteMaintenanceUseCase {
         maintenanceEntity.setTimeUsed(request.getTimeUsed());
         maintenanceEntity.setDateOfCompletion( request.getDateOfCompletion());
 
-        var maintenanceSaved = maintenanceRepository.save(maintenanceEntity);
+        var maintenanceSaved = springDataMaintenanceRepository.save(maintenanceEntity);
 
 
         var order = orderRepository.findByMaintenance_Id(maintenanceId);

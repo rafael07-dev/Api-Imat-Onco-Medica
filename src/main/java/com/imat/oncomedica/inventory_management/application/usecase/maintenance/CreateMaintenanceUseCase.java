@@ -8,20 +8,20 @@ import com.imat.oncomedica.inventory_management.domain.exception.EquipmentNotFou
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceStaffNotFound;
 import com.imat.oncomedica.inventory_management.domain.service.NotificationService;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceRepository;
+import com.imat.oncomedica.inventory_management.infrastructure.persistence.repository.SpringDataMaintenanceRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
 
 public class CreateMaintenanceUseCase {
 
-    private final MaintenanceRepository maintenanceRepository;
+    private final SpringDataMaintenanceRepository springDataMaintenanceRepository;
     private final EquipmentRepository equipmentRepository;
     private final MaintenanceStaffRepository maintenanceStaffRepository;
     private final MaintenanceMapper maintenanceMapper;
     private final NotificationService notificationService;
     private final CreateOrderUseCase createOrderUseCase;
 
-    public CreateMaintenanceUseCase(MaintenanceRepository maintenanceRepository, EquipmentRepository equipmentRepository, MaintenanceStaffRepository maintenanceStaffRepository, MaintenanceMapper maintenanceMapper, NotificationService notificationService, CreateOrderUseCase createOrderUseCase) {
-        this.maintenanceRepository = maintenanceRepository;
+    public CreateMaintenanceUseCase(SpringDataMaintenanceRepository springDataMaintenanceRepository, EquipmentRepository equipmentRepository, MaintenanceStaffRepository maintenanceStaffRepository, MaintenanceMapper maintenanceMapper, NotificationService notificationService, CreateOrderUseCase createOrderUseCase) {
+        this.springDataMaintenanceRepository = springDataMaintenanceRepository;
         this.equipmentRepository = equipmentRepository;
         this.maintenanceStaffRepository = maintenanceStaffRepository;
         this.maintenanceMapper = maintenanceMapper;
@@ -39,7 +39,7 @@ public class CreateMaintenanceUseCase {
 
         var maintenance = maintenanceMapper.toMaintenance(request, equipment, staff);
 
-        var maintenanceResponse = maintenanceRepository.save(maintenance);
+        var maintenanceResponse = springDataMaintenanceRepository.save(maintenance);
 
         createOrderUseCase.execute(maintenance, equipment, staff);
 
