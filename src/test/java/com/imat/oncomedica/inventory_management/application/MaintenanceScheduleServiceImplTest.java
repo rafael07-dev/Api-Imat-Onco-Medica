@@ -4,13 +4,15 @@ import com.imat.oncomedica.inventory_management.application.dto.maintenance.Mont
 import com.imat.oncomedica.inventory_management.application.dto.maintenance.MonthlyMaintenanceTypeResponse;
 import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleResponse;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceScheduleMapper;
-import com.imat.oncomedica.inventory_management.application.service.MaintenanceScheduleServiceImpl;
+import com.imat.oncomedica.inventory_management.application.usecase.schedule.DeleteMaintenanceScheduleUseCase;
+import com.imat.oncomedica.inventory_management.application.usecase.schedule.GetMaintenanceScheduleByIdUseCase;
+import com.imat.oncomedica.inventory_management.application.usecase.schedule.GetMaintenanceScheduleByYearUseCase;
 import com.imat.oncomedica.inventory_management.domain.model.MaintenanceSchedule;
 import com.imat.oncomedica.inventory_management.domain.model.MaintenanceTypeEnum;
 import com.imat.oncomedica.inventory_management.domain.model.MonthlyMaintenance;
 import com.imat.oncomedica.inventory_management.domain.model.MonthlyMaintenanceType;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceScheduleNotFoundException;
-import com.imat.oncomedica.inventory_management.infrastructure.persistence.repository.SpringDataMaintenanceScheduleRepository;
+import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceScheduleRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,13 +29,19 @@ import static org.mockito.Mockito.when;
 public class MaintenanceScheduleServiceImplTest {
 
     @Mock
-    private SpringDataMaintenanceScheduleRepository repository;
+    private MaintenanceScheduleRepository repository;
 
     @Mock
     private MaintenanceScheduleMapper mapper;
 
     @InjectMocks
-    private MaintenanceScheduleServiceImpl service;
+    private GetMaintenanceScheduleByIdUseCase getMaintenanceScheduleByIdUseCase;
+
+    @InjectMocks
+    private GetMaintenanceScheduleByYearUseCase getMaintenanceScheduleByYear;
+
+    @InjectMocks
+    private DeleteMaintenanceScheduleUseCase deleteMaintenanceScheduleUseCase;
 
     @Test
     void shouldReturnMaintenanceScheduleById() {
@@ -44,7 +52,7 @@ public class MaintenanceScheduleServiceImplTest {
         when(repository.findById(id)).thenReturn(Optional.of(maintenanceSchedule));
         when(mapper.buildMaintenanceScheduleResponse(maintenanceSchedule)).thenReturn(maintenanceScheduleResponse);
 
-        var resp = service.getMaintenanceScheduleById(id);
+        var resp = getMaintenanceScheduleByIdUseCase.execute(id);
 
         assertEquals(maintenanceScheduleResponse, resp);
         verify(repository).findById(id);
@@ -57,7 +65,7 @@ public class MaintenanceScheduleServiceImplTest {
 
         when(repository.findById(id)).thenReturn(Optional.empty());
 
-        assertThrows(MaintenanceScheduleNotFoundException.class, () -> service.getMaintenanceScheduleById(id));
+        assertThrows(MaintenanceScheduleNotFoundException.class, () -> getMaintenanceScheduleByIdUseCase.execute(id));
 
         verify(repository).findById(id);
     }
@@ -108,7 +116,7 @@ public class MaintenanceScheduleServiceImplTest {
         when(repository.findByYear(year)).thenReturn(schedules);
         when(mapper.buildMaintenanceScheduleResponse(maintenanceSchedule)).thenReturn(maintenanceScheduleResponse);
 
-        var result = service.getMaintenanceScheduleByYear(year);
+        var result = getMaintenanceScheduleByYear.execute(year);
 
         assertEquals(1, result.size());
         assertEquals(maintenanceScheduleResponse, result.get(0));
@@ -124,9 +132,11 @@ public class MaintenanceScheduleServiceImplTest {
 
         when(repository.findByYear(year)).thenReturn(List.of());
 
-        var exception = assertThrows(MaintenanceScheduleNotFoundException.class, () -> service.getMaintenanceScheduleByYear(year));
+        var exception = assertThrows(MaintenanceScheduleNotFoundException.class,
+                () -> getMaintenanceScheduleByYear.execute(year));
 
-        assertEquals("there is no maintenances for this year", exception.getMessage());
+        assertEquals("there is no maintenances for this year",
+                exception.getMessage());
 
         verify(repository).findByYear(year);
     }
@@ -138,7 +148,7 @@ public class MaintenanceScheduleServiceImplTest {
         when(repository.findById(id)).thenReturn(Optional.empty());
 
         assertThrows(MaintenanceScheduleNotFoundException.class,
-                () -> service.getMaintenanceScheduleById(id));
+                () -> getMaintenanceScheduleByIdUseCase.execute(id));
 
         verify(repository).findById(id);
     }
@@ -152,7 +162,7 @@ public class MaintenanceScheduleServiceImplTest {
 
         when(repository.findById(id)).thenReturn(Optional.of(maintenanceSchedule));
 
-        String result = service.deleteMaintenanceSchedule(id);
+        String result = deleteMaintenanceScheduleUseCase.execute(id);
 
         assertEquals("Maintenance schedule deleted", result);
 
