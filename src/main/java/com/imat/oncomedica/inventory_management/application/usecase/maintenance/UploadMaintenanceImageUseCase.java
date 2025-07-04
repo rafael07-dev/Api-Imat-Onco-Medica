@@ -1,4 +1,4 @@
-package com.imat.oncomedica.inventory_management.application.usecase;
+package com.imat.oncomedica.inventory_management.application.usecase.maintenance;
 
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.service.FileStorageService;

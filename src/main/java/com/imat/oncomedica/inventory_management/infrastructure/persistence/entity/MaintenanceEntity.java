@@ -1,19 +1,30 @@
-package com.imat.oncomedica.inventory_management.domain.model;
+package com.imat.oncomedica.inventory_management.infrastructure.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.imat.oncomedica.inventory_management.domain.model.MaintenanceStaff;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "mantenimientos")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Maintenance {
-
+@NoArgsConstructor
+public class MaintenanceEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Equipment equipment;
+    @ManyToOne
+    @JoinColumn(name = "equipment_id")
+    @JsonIgnore
+    private EquipmentEntity equipment;
 
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
     private MaintenanceStaff maintenanceStaff;
 
     private LocalDateTime scheduledDate;
