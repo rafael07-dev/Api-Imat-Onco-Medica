@@ -1,4 +1,4 @@
-package com.imat.oncomedica.inventory_management.infrastructure.web;
+package com.imat.oncomedica.inventory_management.interfaces.controller;
 
 import com.imat.oncomedica.inventory_management.application.dto.staff.CreateMaintenanceStaffRequest;
 import com.imat.oncomedica.inventory_management.application.dto.staff.MaintenanceStaffResponse;

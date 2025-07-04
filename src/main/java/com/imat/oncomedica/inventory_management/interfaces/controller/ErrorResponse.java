@@ -1,4 +1,4 @@
-package com.imat.oncomedica.inventory_management.infrastructure.web;
+package com.imat.oncomedica.inventory_management.interfaces.controller;
 
 import lombok.Data;
 import java.time.LocalDateTime;
