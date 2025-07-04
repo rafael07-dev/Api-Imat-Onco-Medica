@@ -1,4 +1,4 @@
-package com.imat.oncomedica.inventory_management.application.usecase;
+package com.imat.oncomedica.inventory_management.application.usecase.equipment;
 
 import com.imat.oncomedica.inventory_management.application.dto.equipment.EquipmentResponse;
 import com.imat.oncomedica.inventory_management.application.mapper.EquipmentMapper;

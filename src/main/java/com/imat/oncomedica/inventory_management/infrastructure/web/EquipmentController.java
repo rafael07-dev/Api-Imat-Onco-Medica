@@ -3,7 +3,7 @@ package com.imat.oncomedica.inventory_management.infrastructure.web;
 import com.imat.oncomedica.inventory_management.application.dto.equipment.CreateEquipmentRequest;
 import com.imat.oncomedica.inventory_management.application.dto.equipment.EquipmentRequest;
 import com.imat.oncomedica.inventory_management.application.dto.equipment.EquipmentResponse;
-import com.imat.oncomedica.inventory_management.application.usecase.*;
+import com.imat.oncomedica.inventory_management.application.usecase.equipment.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
