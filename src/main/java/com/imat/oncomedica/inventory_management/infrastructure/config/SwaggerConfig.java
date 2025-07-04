@@ -1,4 +1,4 @@
-package com.imat.oncomedica.inventory_management.config;
+package com.imat.oncomedica.inventory_management.infrastructure.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

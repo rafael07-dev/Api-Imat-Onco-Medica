@@ -1,4 +1,4 @@
-package com.imat.oncomedica.inventory_management.config;
+package com.imat.oncomedica.inventory_management.infrastructure.config;
 
 import com.imat.oncomedica.inventory_management.application.usecase.schedule.DeleteMaintenanceScheduleUseCase;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceScheduleRepository;
