@@ -3,7 +3,7 @@ package com.imat.oncomedica.inventory_management.config;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceMapper;
 import com.imat.oncomedica.inventory_management.application.usecase.CompleteMaintenanceUseCase;
 import com.imat.oncomedica.inventory_management.infrastructure.report.OrderPdfGenerator;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.EquipmentRepository;
+import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.OrderRepository;

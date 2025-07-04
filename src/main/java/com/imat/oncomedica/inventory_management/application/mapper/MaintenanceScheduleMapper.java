@@ -3,7 +3,7 @@ package com.imat.oncomedica.inventory_management.application.mapper;
 import com.imat.oncomedica.inventory_management.application.dto.maintenance.MonthlyMaintenanceResponse;
 import com.imat.oncomedica.inventory_management.application.dto.maintenance.MonthlyMaintenanceTypeResponse;
 import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleResponse;
-import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedule;
+import com.imat.oncomedica.inventory_management.domain.model.MaintenanceSchedule;
 import org.mapstruct.Mapper;
 import java.util.ArrayList;
 import java.util.List;

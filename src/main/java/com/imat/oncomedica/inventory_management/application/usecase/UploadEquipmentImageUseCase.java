@@ -1,9 +1,9 @@
 package com.imat.oncomedica.inventory_management.application.usecase;
 
-import com.imat.oncomedica.inventory_management.domain.entity.Equipment;
+import com.imat.oncomedica.inventory_management.domain.model.Equipment;
 import com.imat.oncomedica.inventory_management.domain.exception.EquipmentNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.service.FileStorageService;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.EquipmentRepository;
+import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

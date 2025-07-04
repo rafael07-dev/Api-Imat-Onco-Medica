@@ -1,6 +1,6 @@
 package com.imat.oncomedica.inventory_management.infrastructure.notification;
 
-import com.imat.oncomedica.inventory_management.domain.entity.Maintenance;
+import com.imat.oncomedica.inventory_management.domain.model.Maintenance;
 import com.imat.oncomedica.inventory_management.domain.service.NotificationService;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

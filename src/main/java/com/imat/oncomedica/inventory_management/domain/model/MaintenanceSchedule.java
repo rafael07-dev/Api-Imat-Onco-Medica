@@ -1,4 +1,4 @@
-package com.imat.oncomedica.inventory_management.domain.entity;
+package com.imat.oncomedica.inventory_management.domain.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

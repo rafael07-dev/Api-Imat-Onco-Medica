@@ -1,6 +1,6 @@
 package com.imat.oncomedica.inventory_management.infrastructure.repository;
 
-import com.imat.oncomedica.inventory_management.domain.entity.Order;
+import com.imat.oncomedica.inventory_management.domain.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 

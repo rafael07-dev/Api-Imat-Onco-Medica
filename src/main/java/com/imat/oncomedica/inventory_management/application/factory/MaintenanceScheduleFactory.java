@@ -2,10 +2,10 @@ package com.imat.oncomedica.inventory_management.application.factory;
 
 import com.imat.oncomedica.inventory_management.application.builder.util.MaintenanceScheduleBuilderHelper;
 import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleRequest;
-import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedule;
+import com.imat.oncomedica.inventory_management.domain.model.MaintenanceSchedule;
 import com.imat.oncomedica.inventory_management.domain.exception.EquipmentNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceStaffNotFound;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.EquipmentRepository;
+import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
 import org.springframework.stereotype.Component;
 

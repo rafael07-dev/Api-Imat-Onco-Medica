@@ -1,6 +1,6 @@
 package com.imat.oncomedica.inventory_management.application.usecase;
 
-import com.imat.oncomedica.inventory_management.domain.entity.*;
+import com.imat.oncomedica.inventory_management.domain.model.*;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.OrderRepository;
 import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;

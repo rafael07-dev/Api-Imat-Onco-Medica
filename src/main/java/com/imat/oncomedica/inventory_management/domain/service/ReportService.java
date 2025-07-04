@@ -1,6 +1,6 @@
 package com.imat.oncomedica.inventory_management.domain.service;
 
-import com.imat.oncomedica.inventory_management.domain.entity.Order;
+import com.imat.oncomedica.inventory_management.domain.model.Order;
 
 public interface ReportService {
 

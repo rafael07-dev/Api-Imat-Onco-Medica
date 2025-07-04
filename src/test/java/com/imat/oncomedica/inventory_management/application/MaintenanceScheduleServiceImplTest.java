@@ -5,10 +5,10 @@ import com.imat.oncomedica.inventory_management.application.dto.maintenance.Mont
 import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleResponse;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceScheduleMapper;
 import com.imat.oncomedica.inventory_management.application.service.MaintenanceScheduleServiceImpl;
-import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedule;
-import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceTypeEnum;
-import com.imat.oncomedica.inventory_management.domain.entity.MonthlyMaintenance;
-import com.imat.oncomedica.inventory_management.domain.entity.MonthlyMaintenanceType;
+import com.imat.oncomedica.inventory_management.domain.model.MaintenanceSchedule;
+import com.imat.oncomedica.inventory_management.domain.model.MaintenanceTypeEnum;
+import com.imat.oncomedica.inventory_management.domain.model.MonthlyMaintenance;
+import com.imat.oncomedica.inventory_management.domain.model.MonthlyMaintenanceType;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceScheduleNotFoundException;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceScheduleRepository;
 import org.junit.jupiter.api.Test;

@@ -1,16 +1,14 @@
 package com.imat.oncomedica.inventory_management.application.mapper;
 
-import com.imat.oncomedica.inventory_management.application.dto.equipment.CreateEquipmentRequest;
+import com.imat.oncomedica.inventory_management.application.dto.equipment.EquipmentRequest;
 import com.imat.oncomedica.inventory_management.application.dto.equipment.EquipmentResponse;
-import com.imat.oncomedica.inventory_management.domain.entity.Equipment;
+import com.imat.oncomedica.inventory_management.domain.model.Equipment;
 import org.mapstruct.Mapper;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface EquipmentMapper {
 
-    default Equipment toEquipment(CreateEquipmentRequest equipment){
+    default Equipment toEquipment(EquipmentRequest equipment){
         return new Equipment(
                 null,
                 equipment.getEquipmentName(),
@@ -46,10 +44,5 @@ public interface EquipmentMapper {
                 equipment.getFloor(),
                 equipment.getTower()
         );
-    };
-    default List<EquipmentResponse> toEquipmentResponseList(List<Equipment> equipments){
-        return equipments.stream()
-                .map(this::toEquipmentResponse)
-                .toList();
     };
 }

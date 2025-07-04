@@ -7,8 +7,8 @@ import com.imat.oncomedica.inventory_management.application.dto.schedule.CreateM
 import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleResponse;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceScheduleMapper;
 import com.imat.oncomedica.inventory_management.application.usecase.CreateMaintenanceScheduleUseCase;
-import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedule;
-import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceTypeEnum;
+import com.imat.oncomedica.inventory_management.domain.model.MaintenanceSchedule;
+import com.imat.oncomedica.inventory_management.domain.model.MaintenanceTypeEnum;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceScheduleAlreadyExistsException;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceScheduleRepository;
 import org.junit.jupiter.api.BeforeEach;

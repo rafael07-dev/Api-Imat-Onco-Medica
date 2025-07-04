@@ -1,6 +1,6 @@
 package com.imat.oncomedica.inventory_management.infrastructure.repository;
 
-import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedule;
+import com.imat.oncomedica.inventory_management.domain.model.MaintenanceSchedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

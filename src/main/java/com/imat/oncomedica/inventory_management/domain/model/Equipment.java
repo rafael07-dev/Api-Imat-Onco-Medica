@@ -1,22 +1,17 @@
-package com.imat.oncomedica.inventory_management.domain.entity;
+package com.imat.oncomedica.inventory_management.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.List;
 
-@Entity
-@Table(name = "equipos")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Equipment implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String equipmentName;
     private String imageUrl;
@@ -31,15 +26,9 @@ public class Equipment implements Serializable {
     private String floor;
     private String tower;
 
-    @OneToMany(mappedBy = "equipment")
-    @JsonIgnore
     private List<Maintenance> maintenances;
 
-    @OneToMany(mappedBy = "equipment")
-    @JsonIgnore
     private List<MaintenanceSchedule> maintenanceSchedules;
 
-    @OneToMany(mappedBy = "equipment", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Order> orderList;
 }

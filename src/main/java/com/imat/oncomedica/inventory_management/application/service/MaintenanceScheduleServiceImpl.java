@@ -1,7 +1,7 @@
 package com.imat.oncomedica.inventory_management.application.service;
 
 import com.imat.oncomedica.inventory_management.application.dto.schedule.MaintenanceScheduleResponse;
-import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceSchedule;
+import com.imat.oncomedica.inventory_management.domain.model.MaintenanceSchedule;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceScheduleMapper;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceScheduleNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.service.MaintenanceScheduleService;

@@ -1,8 +1,8 @@
 package com.imat.oncomedica.inventory_management.application.dto.schedule;
 
 import com.imat.oncomedica.inventory_management.application.dto.maintenance.MonthlyMaintenanceResponse;
-import com.imat.oncomedica.inventory_management.domain.entity.Equipment;
-import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceStaff;
+import com.imat.oncomedica.inventory_management.domain.model.Equipment;
+import com.imat.oncomedica.inventory_management.domain.model.MaintenanceStaff;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

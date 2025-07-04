@@ -4,7 +4,7 @@ import com.imat.oncomedica.inventory_management.application.dto.staff.CreateMain
 import com.imat.oncomedica.inventory_management.application.dto.staff.MaintenanceStaffResponse;
 import com.imat.oncomedica.inventory_management.application.dto.staff.UpdateMaintenanceStaffRequest;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceStaffMapper;
-import com.imat.oncomedica.inventory_management.domain.entity.MaintenanceStaff;
+import com.imat.oncomedica.inventory_management.domain.model.MaintenanceStaff;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceStaffNotFound;
 import com.imat.oncomedica.inventory_management.domain.service.MaintenanceStaffService;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;

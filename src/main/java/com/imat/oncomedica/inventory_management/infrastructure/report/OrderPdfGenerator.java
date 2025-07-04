@@ -1,6 +1,6 @@
 package com.imat.oncomedica.inventory_management.infrastructure.report;
 
-import com.imat.oncomedica.inventory_management.domain.entity.Order;
+import com.imat.oncomedica.inventory_management.domain.model.Order;
 import com.imat.oncomedica.inventory_management.domain.exception.OrderNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.exception.ReportPdfGeneratorException;
 import com.imat.oncomedica.inventory_management.domain.service.ReportService;
