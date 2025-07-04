@@ -18,6 +18,6 @@ public class DeleteMaintenanceScheduleUseCase {
 
         maintenanceScheduleRepository.delete(shedule);
 
-        return "Maintenance Schedule Deleted";
+        return "Maintenance schedule deleted";
     }
 }
