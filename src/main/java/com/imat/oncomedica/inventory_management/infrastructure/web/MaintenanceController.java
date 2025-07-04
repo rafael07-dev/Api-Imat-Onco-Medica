@@ -3,15 +3,10 @@ package com.imat.oncomedica.inventory_management.infrastructure.web;
 import com.imat.oncomedica.inventory_management.application.dto.maintenance.CreateMaintenanceRequest;
 import com.imat.oncomedica.inventory_management.application.dto.maintenance.MaintenanceResponse;
 import com.imat.oncomedica.inventory_management.application.dto.maintenance.UpdateMaintenanceRequest;
-import com.imat.oncomedica.inventory_management.application.usecase.maintenance.CompleteMaintenanceUseCase;
-import com.imat.oncomedica.inventory_management.application.usecase.maintenance.CreateMaintenanceUseCase;
-import com.imat.oncomedica.inventory_management.application.usecase.maintenance.UpdateMaintenanceUseCase;
-import com.imat.oncomedica.inventory_management.application.usecase.maintenance.UploadMaintenanceImageUseCase;
-import com.imat.oncomedica.inventory_management.domain.service.MaintenanceService;
+import com.imat.oncomedica.inventory_management.application.usecase.maintenance.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.net.URI;
 import java.util.List;
 
@@ -19,38 +14,40 @@ import java.util.List;
 @RequestMapping("/api/maintenances")
 public class MaintenanceController {
 
-    private final MaintenanceService maintenanceService;
     private final CreateMaintenanceUseCase createMaintenanceUseCase;
     private final UploadMaintenanceImageUseCase uploadMaintenanceImageUseCase;
     private final UpdateMaintenanceUseCase updateMaintenanceUseCase;
     private final CompleteMaintenanceUseCase completeMaintenanceUseCase;
+    private final DeleteMaintenanceUseCase deleteMaintenanceUseCase;
+    private final GetAllMaintenanceUseCase getAllMaintenanceUseCase;
+    private final GetMaintenanceByEquipmentIdUseCase getMaintenanceByEquipmentIdUseCase;
+    private final GetMaintenancesByMaintenanceStaffIdUseCase getMaintenancesByMaintenanceStaffIdUseCase;
 
-    public MaintenanceController(MaintenanceService maintenanceService, CreateMaintenanceUseCase createMaintenanceUseCase, UploadMaintenanceImageUseCase uploadMaintenanceImageUseCase, UpdateMaintenanceUseCase updateMaintenanceUseCase, CompleteMaintenanceUseCase completeMaintenanceUseCase) {
-        this.maintenanceService = maintenanceService;
+    public MaintenanceController(CreateMaintenanceUseCase createMaintenanceUseCase, UploadMaintenanceImageUseCase uploadMaintenanceImageUseCase, UpdateMaintenanceUseCase updateMaintenanceUseCase, CompleteMaintenanceUseCase completeMaintenanceUseCase, DeleteMaintenanceUseCase deleteMaintenanceUseCase, GetAllMaintenanceUseCase getAllMaintenanceUseCase, GetMaintenanceByEquipmentIdUseCase getMaintenanceByEquipmentIdUseCase, GetMaintenancesByMaintenanceStaffIdUseCase getMaintenancesByMaintenanceStaffIdUseCase) {
         this.createMaintenanceUseCase = createMaintenanceUseCase;
         this.uploadMaintenanceImageUseCase = uploadMaintenanceImageUseCase;
         this.updateMaintenanceUseCase = updateMaintenanceUseCase;
         this.completeMaintenanceUseCase = completeMaintenanceUseCase;
+        this.deleteMaintenanceUseCase = deleteMaintenanceUseCase;
+        this.getAllMaintenanceUseCase = getAllMaintenanceUseCase;
+        this.getMaintenanceByEquipmentIdUseCase = getMaintenanceByEquipmentIdUseCase;
+        this.getMaintenancesByMaintenanceStaffIdUseCase = getMaintenancesByMaintenanceStaffIdUseCase;
     }
 
 
     @GetMapping("/")
     public ResponseEntity<List<MaintenanceResponse>> findAll(){
-        return ResponseEntity.ok().body(maintenanceService.getAllMaintenances());
+        return ResponseEntity.ok().body(getAllMaintenanceUseCase.execute());
     }
 
     @GetMapping("/equipment/{equipmentId}")
     public ResponseEntity<List<MaintenanceResponse>> getMaintenancesByEquipmentId(@PathVariable Integer equipmentId) {
-        List<MaintenanceResponse> maintenances = maintenanceService.getMaintenanceByEquipmentID(equipmentId);
-        if (maintenances.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(maintenances);
+        return ResponseEntity.ok().body(getMaintenanceByEquipmentIdUseCase.execute(equipmentId))
     }
 
     @GetMapping("/{maintenanceStaffId}")
     public ResponseEntity<List<MaintenanceResponse>> getMaintenancesByMaintenanceStaffId(@PathVariable Integer maintenanceStaffId) {
-        List<MaintenanceResponse> maintenances = maintenanceService.getEquipmentByStaffId(maintenanceStaffId);
+        List<MaintenanceResponse> maintenances = getMaintenancesByMaintenanceStaffIdUseCase.execute(maintenanceStaffId);
         if (maintenances.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -86,6 +83,6 @@ public class MaintenanceController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Integer maintenanceId){
         return ResponseEntity.ok()
-                .body(maintenanceService.deleteMaintenance(maintenanceId));
+                .body(deleteMaintenanceUseCase.execute(maintenanceId));
     }
 }

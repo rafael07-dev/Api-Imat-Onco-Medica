@@ -9,18 +9,18 @@ import com.imat.oncomedica.inventory_management.domain.model.MaintenanceStaff;
 import com.imat.oncomedica.inventory_management.domain.exception.EquipmentNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
-import com.imat.oncomedica.inventory_management.infrastructure.persistence.repository.SpringDataMaintenanceRepository;
+import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
 
 public class UpdateMaintenanceUseCase {
 
-    private final SpringDataMaintenanceRepository springDataMaintenanceRepository;
+    private final MaintenanceRepository maintenanceRepository;
     private final MaintenanceMapper maintenanceMapper;
     private final MaintenanceStaffRepository maintenanceStaffRepository;
     private final EquipmentRepository equipmentRepository;
 
-    public UpdateMaintenanceUseCase(SpringDataMaintenanceRepository springDataMaintenanceRepository, MaintenanceMapper maintenanceMapper, MaintenanceStaffRepository maintenanceStaffRepository, EquipmentRepository equipmentRepository) {
-        this.springDataMaintenanceRepository = springDataMaintenanceRepository;
+    public UpdateMaintenanceUseCase(MaintenanceRepository maintenanceRepository, MaintenanceMapper maintenanceMapper, MaintenanceStaffRepository maintenanceStaffRepository, EquipmentRepository equipmentRepository) {
+        this.maintenanceRepository = maintenanceRepository;
         this.maintenanceMapper = maintenanceMapper;
         this.maintenanceStaffRepository = maintenanceStaffRepository;
         this.equipmentRepository = equipmentRepository;
@@ -29,7 +29,7 @@ public class UpdateMaintenanceUseCase {
 
     public MaintenanceResponse execute(Integer maintenanceId, UpdateMaintenanceRequest request){
 
-        var maintenance = springDataMaintenanceRepository.findById(maintenanceId)
+        var maintenance = maintenanceRepository.findById(maintenanceId)
                 .orElseThrow(() -> new MaintenanceNotFoundException(maintenanceId));
 
         var staff = maintenance.getMaintenanceStaff();
@@ -42,7 +42,7 @@ public class UpdateMaintenanceUseCase {
         staff.setMaintenanceCompleted(staff.getMaintenanceCompleted() + 1);
         maintenanceStaffRepository.save(staff);
 
-        var maintenanceSaved = springDataMaintenanceRepository.save(maintenance);
+        var maintenanceSaved = maintenanceRepository.save(maintenance);
 
         return maintenanceMapper.toMaintenanceResponse(maintenanceSaved);
     }
