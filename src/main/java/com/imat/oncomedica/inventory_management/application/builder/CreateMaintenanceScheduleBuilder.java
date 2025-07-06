@@ -5,9 +5,7 @@ import com.imat.oncomedica.inventory_management.application.dto.schedule.Mainten
 import com.imat.oncomedica.inventory_management.application.factory.MaintenanceScheduleFactory;
 import com.imat.oncomedica.inventory_management.domain.model.MaintenanceSchedule;
 import com.imat.oncomedica.inventory_management.domain.exception.MonthlyMaintenanceNullOrEmptyException;
-import org.springframework.stereotype.Component;
 
-@Component
 public class CreateMaintenanceScheduleBuilder implements MaintenanceScheduleBuilderStrategy {
 
     private final MaintenanceScheduleFactory maintenanceScheduleFactory;
