@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class CreateMaintenanceScheduleBuilderConfig {
 
     @Bean
-    public CreateMaintenanceScheduleBuilder createMaintenanceScheduleBuilderConfig(
+    public CreateMaintenanceScheduleBuilder createMaintenanceScheduleBuilder(
             MaintenanceScheduleFactory maintenanceScheduleFactory
     ) {
         return new CreateMaintenanceScheduleBuilder(
