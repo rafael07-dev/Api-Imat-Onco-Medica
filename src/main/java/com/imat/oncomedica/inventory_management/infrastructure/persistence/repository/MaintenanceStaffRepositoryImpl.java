@@ -1,6 +1,5 @@
 package com.imat.oncomedica.inventory_management.infrastructure.persistence.repository;
 
-import com.imat.oncomedica.inventory_management.application.dto.staff.CreateMaintenanceStaffRequest;
 import com.imat.oncomedica.inventory_management.application.dto.staff.UpdateMaintenanceStaffRequest;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceStaffNotFound;
 import com.imat.oncomedica.inventory_management.domain.model.MaintenanceStaff;
@@ -36,8 +35,8 @@ public class MaintenanceStaffRepositoryImpl implements MaintenanceStaffRepositor
     }
 
     @Override
-    public MaintenanceStaff save(CreateMaintenanceStaffRequest request) {
-        MaintenanceStaffEntity ms = maintenanceStaffMapper.toEntity(request);
+    public MaintenanceStaff save(MaintenanceStaff maintenanceStaff) {
+        MaintenanceStaffEntity ms = maintenanceStaffMapper.toEntity(maintenanceStaff);
 
         if (ms == null){
             throw new MaintenanceStaffNotFound();
