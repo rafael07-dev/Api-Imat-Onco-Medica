@@ -7,9 +7,9 @@ import com.imat.oncomedica.inventory_management.application.usecase.CreateOrderU
 import com.imat.oncomedica.inventory_management.domain.exception.EquipmentNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceStaffNotFound;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceRepository;
+import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceStaffRepository;
 import com.imat.oncomedica.inventory_management.domain.service.NotificationService;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
 
 public class CreateMaintenanceUseCase {
 
