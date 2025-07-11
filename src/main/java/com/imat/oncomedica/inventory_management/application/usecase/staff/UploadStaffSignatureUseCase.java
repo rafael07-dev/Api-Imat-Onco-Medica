@@ -1,4 +1,4 @@
-package com.imat.oncomedica.inventory_management.application.usecase;
+package com.imat.oncomedica.inventory_management.application.usecase.staff;
 
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceStaffNotFound;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceStaffRepository;
