@@ -4,7 +4,7 @@ import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceMa
 import com.imat.oncomedica.inventory_management.application.usecase.maintenance.UpdateMaintenanceUseCase;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceRepository;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
+import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceStaffRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
