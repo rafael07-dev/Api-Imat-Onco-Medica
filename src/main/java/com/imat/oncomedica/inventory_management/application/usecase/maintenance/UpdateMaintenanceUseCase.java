@@ -10,7 +10,7 @@ import com.imat.oncomedica.inventory_management.domain.exception.EquipmentNotFou
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceRepository;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
+import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceStaffRepository;
 
 public class UpdateMaintenanceUseCase {
 
@@ -25,7 +25,6 @@ public class UpdateMaintenanceUseCase {
         this.maintenanceStaffRepository = maintenanceStaffRepository;
         this.equipmentRepository = equipmentRepository;
     }
-
 
     public MaintenanceResponse execute(Integer maintenanceId, UpdateMaintenanceRequest request){
 
