@@ -6,7 +6,7 @@ import com.imat.oncomedica.inventory_management.domain.model.MaintenanceSchedule
 import com.imat.oncomedica.inventory_management.domain.exception.EquipmentNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceStaffNotFound;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
+import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceStaffRepository;
 
 public class MaintenanceScheduleFactory {
 
@@ -17,6 +17,7 @@ public class MaintenanceScheduleFactory {
         this.equipmentRepository = equipmentRepository;
         this.maintenanceStaffRepository = maintenanceStaffRepository;
     }
+
 
     public MaintenanceSchedule buildMaintenanceSchedule(MaintenanceScheduleRequest request) {
         MaintenanceSchedule maintenanceSchedule = new MaintenanceSchedule();
