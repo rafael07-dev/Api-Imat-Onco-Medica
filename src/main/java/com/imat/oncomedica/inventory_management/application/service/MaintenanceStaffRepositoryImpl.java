@@ -6,43 +6,43 @@ import com.imat.oncomedica.inventory_management.application.dto.staff.UpdateMain
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceStaffMapper;
 import com.imat.oncomedica.inventory_management.domain.model.MaintenanceStaff;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceStaffNotFound;
-import com.imat.oncomedica.inventory_management.domain.service.MaintenanceStaffService;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
+import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceStaffRepository;
+import com.imat.oncomedica.inventory_management.infrastructure.persistence.repository.SpringDataMaintenanceStaffRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MaintenanceStaffServiceImpl implements MaintenanceStaffService {
+public class MaintenanceStaffRepositoryImpl implements MaintenanceStaffRepository {
 
-    private final MaintenanceStaffRepository maintenanceStaffRepository;
+    private final SpringDataMaintenanceStaffRepository springDataMaintenanceStaffRepository;
     private final MaintenanceStaffMapper maintenanceStaffMapper;
 
-    public MaintenanceStaffServiceImpl(MaintenanceStaffRepository maintenanceStaffRepository, MaintenanceStaffMapper maintenanceStaffMapper) {
-        this.maintenanceStaffRepository = maintenanceStaffRepository;
+    public MaintenanceStaffRepositoryImpl(SpringDataMaintenanceStaffRepository springDataMaintenanceStaffRepository, MaintenanceStaffMapper maintenanceStaffMapper) {
+        this.springDataMaintenanceStaffRepository = springDataMaintenanceStaffRepository;
         this.maintenanceStaffMapper = maintenanceStaffMapper;
     }
 
     @Override
     public MaintenanceStaffResponse getMaintenanceStaffByName(String name) {
-        var maintenanceStaff = maintenanceStaffRepository.findByFirstName(name);
+        var maintenanceStaff = springDataMaintenanceStaffRepository.findByFirstName(name);
         return maintenanceStaffMapper.toMaintenanceStaffResponse(maintenanceStaff);
     }
 
     @Override
     public List<MaintenanceStaffResponse> getAllMaintenanceStaff() {
-        List<MaintenanceStaff> maintenanceStaffList = maintenanceStaffRepository.findAll();
+        List<MaintenanceStaff> maintenanceStaffList = springDataMaintenanceStaffRepository.findAll();
         return maintenanceStaffMapper.toMaintenanceStaffResponseList(maintenanceStaffList);
     }
 
     @Override
     public MaintenanceStaffResponse createMaintenanceStaff(CreateMaintenanceStaffRequest request) {
-        MaintenanceStaff ms = maintenanceStaffMapper.toMaintenanceStaff(request);
+        MaintenanceStaff ms = maintenanceStaffMapper.to (request);
 
         if (ms == null){
             throw new MaintenanceStaffNotFound();
         }
 
-        maintenanceStaffRepository.save(ms);
+        springDataMaintenanceStaffRepository.save(ms);
 
         return maintenanceStaffMapper.toMaintenanceStaffResponse(ms);
     }
@@ -50,7 +50,7 @@ public class MaintenanceStaffServiceImpl implements MaintenanceStaffService {
     @Override
     public MaintenanceStaffResponse updateMaintenanceStaff(UpdateMaintenanceStaffRequest maintenanceStaff, Integer id) {
 
-        var maintenanceStaffSaved = maintenanceStaffRepository.findById(id)
+        var maintenanceStaffSaved =  .findById(id)
                 .orElseThrow(() -> new MaintenanceStaffNotFound(id));
 
         if (maintenanceStaffSaved == null){
@@ -58,13 +58,13 @@ public class MaintenanceStaffServiceImpl implements MaintenanceStaffService {
         }
 
         var maintenanceStaffUpdated = maintenanceStaffMapper.updateMaintenanceStaff(maintenanceStaff, maintenanceStaffSaved);
-        var staffSaved = maintenanceStaffRepository.save(maintenanceStaffUpdated);
+        var staffSaved = springDataMaintenanceStaffRepository.save(maintenanceStaffUpdated);
         return maintenanceStaffMapper.toMaintenanceStaffResponse(staffSaved);
     }
 
     @Override
     public MaintenanceStaffResponse getMaintenanceStaffById(Integer id) {
-        MaintenanceStaff maintenanceStaff = maintenanceStaffRepository.findById(id)
+        MaintenanceStaff maintenanceStaff = springDataMaintenanceStaffRepository.findById(id)
                 .orElseThrow(() -> new MaintenanceStaffNotFound(id));
 
         return maintenanceStaffMapper.toMaintenanceStaffResponse(maintenanceStaff);
