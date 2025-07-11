@@ -1,11 +1,12 @@
-package com.imat.oncomedica.inventory_management.infrastructure.repository;
+package com.imat.oncomedica.inventory_management.infrastructure.persistence.repository;
 
-import com.imat.oncomedica.inventory_management.domain.model.MaintenanceStaff;
+import com.imat.oncomedica.inventory_management.infrastructure.persistence.entity.MaintenanceStaffEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.Optional;
 
 @Repository
-public interface MaintenanceStaffRepository extends JpaRepository<MaintenanceStaff, Integer> {
+public interface SpringDataMaintenanceStaffRepository extends JpaRepository<MaintenanceStaffEntity, Integer> {
 
-    MaintenanceStaff findByFirstName(String name);
+    Optional<MaintenanceStaffEntity> findByFirstName(String name);
 }
