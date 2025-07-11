@@ -2,7 +2,7 @@ package com.imat.oncomedica.inventory_management.infrastructure.config;
 
 import com.imat.oncomedica.inventory_management.application.factory.MaintenanceScheduleFactory;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.MaintenanceStaffRepository;
+import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceStaffRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
