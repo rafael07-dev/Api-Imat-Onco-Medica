@@ -8,4 +8,8 @@ public class MaintenanceStaffNotFound extends RuntimeException{
     public MaintenanceStaffNotFound(Integer id) {
         super("Maintenance Staff Not Found with id " + id);
     }
+
+    public MaintenanceStaffNotFound(String message) {
+        super(message);
+    }
 }
