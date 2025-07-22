@@ -3,7 +3,7 @@ package com.imat.oncomedica.inventory_management.application.usecase.maintenance
 import com.imat.oncomedica.inventory_management.application.dto.maintenance.CreateMaintenanceRequest;
 import com.imat.oncomedica.inventory_management.application.dto.maintenance.MaintenanceResponse;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceMapper;
-import com.imat.oncomedica.inventory_management.application.usecase.CreateOrderUseCase;
+import com.imat.oncomedica.inventory_management.application.usecase.order.CreateOrderUseCase;
 import com.imat.oncomedica.inventory_management.domain.exception.EquipmentNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceStaffNotFound;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceRepository;
