@@ -5,7 +5,9 @@ import com.imat.oncomedica.inventory_management.application.dto.equipment.Equipm
 import com.imat.oncomedica.inventory_management.application.mapper.EquipmentMapper;
 import com.imat.oncomedica.inventory_management.domain.model.Equipment;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CreateEquipmentUseCase {
 
     private final EquipmentRepository equipmentRepository;
