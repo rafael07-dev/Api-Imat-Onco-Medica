@@ -13,14 +13,9 @@ import java.util.List;
 public class MonthlyMaintenance implements Serializable {
 
     private Integer id;
-
-    @JsonIgnore
     private MaintenanceSchedule maintenanceSchedule;
-
     private Integer month;
-
     private Integer year;
-
     private List<MonthlyMaintenanceType> maintenanceTypes;
 
 }
