@@ -2,7 +2,9 @@ package com.imat.oncomedica.inventory_management.application.usecase.maintenance
 
 import com.imat.oncomedica.inventory_management.domain.exception.MaintenanceNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DeleteMaintenanceUseCase {
 
     private final MaintenanceRepository maintenanceRepository;

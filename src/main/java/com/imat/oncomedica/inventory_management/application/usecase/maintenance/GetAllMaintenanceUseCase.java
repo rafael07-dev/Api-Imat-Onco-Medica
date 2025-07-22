@@ -3,8 +3,10 @@ package com.imat.oncomedica.inventory_management.application.usecase.maintenance
 import com.imat.oncomedica.inventory_management.application.dto.maintenance.MaintenanceResponse;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceMapper;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceRepository;
+import org.springframework.stereotype.Component;
 import java.util.List;
 
+@Component
 public class GetAllMaintenanceUseCase {
 
     private final MaintenanceRepository maintenanceRepository;
