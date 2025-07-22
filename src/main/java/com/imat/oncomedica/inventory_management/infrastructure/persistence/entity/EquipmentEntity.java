@@ -1,9 +1,6 @@
 package com.imat.oncomedica.inventory_management.infrastructure.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.imat.oncomedica.inventory_management.domain.model.Maintenance;
-import com.imat.oncomedica.inventory_management.domain.model.MaintenanceSchedule;
-import com.imat.oncomedica.inventory_management.domain.model.Order;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,14 +33,14 @@ public class EquipmentEntity implements Serializable {
 
     @OneToMany(mappedBy = "equipment")
     @JsonIgnore
-    private List<Maintenance> maintenances;
+    private List<MaintenanceEntity> maintenances;
 
     @OneToMany(mappedBy = "equipment")
     @JsonIgnore
-    private List<MaintenanceSchedule> maintenanceSchedules;
+    private List<MaintenanceScheduleEntity> maintenanceSchedules;
 
     @OneToMany(mappedBy = "equipment", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Order> orderList;
+    private List<OrderEntity> orderList;
 }
 
