@@ -2,7 +2,7 @@ package com.imat.oncomedica.inventory_management.infrastructure.config;
 
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceMapper;
 import com.imat.oncomedica.inventory_management.application.usecase.maintenance.CreateMaintenanceUseCase;
-import com.imat.oncomedica.inventory_management.application.usecase.CreateOrderUseCase;
+import com.imat.oncomedica.inventory_management.application.usecase.order.CreateOrderUseCase;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceRepository;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceStaffRepository;
 import com.imat.oncomedica.inventory_management.domain.service.NotificationService;
