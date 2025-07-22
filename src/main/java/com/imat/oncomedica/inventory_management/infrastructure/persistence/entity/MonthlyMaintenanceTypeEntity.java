@@ -2,7 +2,6 @@ package com.imat.oncomedica.inventory_management.infrastructure.persistence.enti
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.imat.oncomedica.inventory_management.domain.model.MaintenanceTypeEnum;
-import com.imat.oncomedica.inventory_management.domain.model.MonthlyMaintenanceType;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,7 +19,7 @@ public class MonthlyMaintenanceTypeEntity {
     @ManyToOne
     @JoinColumn(name = "monthly_maintenance_id")
     @JsonIgnore
-    private MonthlyMaintenanceType monthlyMaintenance;
+    private MonthlyMaintenanceEntity monthlyMaintenance;
 
     private Integer quantity;
 }

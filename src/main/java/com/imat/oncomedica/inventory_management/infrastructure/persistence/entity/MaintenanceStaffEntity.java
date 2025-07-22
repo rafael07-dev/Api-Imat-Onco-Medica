@@ -1,7 +1,6 @@
 package com.imat.oncomedica.inventory_management.infrastructure.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.imat.oncomedica.inventory_management.domain.model.Order;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,6 +38,6 @@ public class MaintenanceStaffEntity {
 
     @OneToMany(mappedBy = "maintenanceStaff", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Order> orderList;
+    private List<OrderEntity> orderList;
 
 }

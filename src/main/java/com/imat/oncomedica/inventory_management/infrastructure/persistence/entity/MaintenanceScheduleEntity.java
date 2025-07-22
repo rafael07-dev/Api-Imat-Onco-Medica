@@ -26,9 +26,9 @@ public class MaintenanceScheduleEntity implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "responsible_id")
-    private MaintenanceStaff responsible;
+    private MaintenanceStaffEntity responsible;
 
     @OneToMany(mappedBy = "maintenanceSchedule", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MonthlyMaintenance> monthlyMaintenances;
+    private List<MonthlyMaintenanceEntity> monthlyMaintenances;
 
 }
