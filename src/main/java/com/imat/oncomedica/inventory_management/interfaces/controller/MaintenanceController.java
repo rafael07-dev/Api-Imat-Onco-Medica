@@ -77,7 +77,7 @@ public class MaintenanceController {
 
     @PostMapping(value = "/upload-image/{maintenanceId}", consumes = "multipart/form-data")
     public String updateMaintenanceImage(@RequestParam("file") MultipartFile file, @PathVariable Integer maintenanceId){
-        return uploadMaintenanceImageUseCase.UploadMaintenanceImageUseCase(file, maintenanceId);
+        return uploadMaintenanceImageUseCase.execute(file, maintenanceId);
     }
 
     @DeleteMapping("/{id}")
