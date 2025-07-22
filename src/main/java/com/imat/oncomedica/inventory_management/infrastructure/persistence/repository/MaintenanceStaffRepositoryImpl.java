@@ -6,9 +6,12 @@ import com.imat.oncomedica.inventory_management.domain.model.MaintenanceStaff;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceStaffRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.persistence.entity.MaintenanceStaffEntity;
 import com.imat.oncomedica.inventory_management.infrastructure.persistence.mapper.MaintenanceStaffPersistenceMapper;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class MaintenanceStaffRepositoryImpl implements MaintenanceStaffRepository {
 
     private final SpringDataMaintenanceStaffRepository maintenanceStaffRepository;
