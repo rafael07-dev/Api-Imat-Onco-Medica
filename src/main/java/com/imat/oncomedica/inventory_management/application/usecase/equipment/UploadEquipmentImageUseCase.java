@@ -4,10 +4,10 @@ import com.imat.oncomedica.inventory_management.domain.model.Equipment;
 import com.imat.oncomedica.inventory_management.domain.exception.EquipmentNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.service.FileStorageService;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-@Service
+@Component
 public class UploadEquipmentImageUseCase {
 
     private final EquipmentRepository repository;

@@ -3,8 +3,11 @@ package com.imat.oncomedica.inventory_management.application.usecase.equipment;
 import com.imat.oncomedica.inventory_management.application.dto.equipment.EquipmentResponse;
 import com.imat.oncomedica.inventory_management.application.mapper.EquipmentMapper;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class GetAllEquipmentUseCase {
 
     private final EquipmentRepository equipmentRepository;

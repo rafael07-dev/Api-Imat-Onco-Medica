@@ -4,7 +4,9 @@ import com.imat.oncomedica.inventory_management.application.dto.equipment.Equipm
 import com.imat.oncomedica.inventory_management.application.mapper.EquipmentMapper;
 import com.imat.oncomedica.inventory_management.domain.exception.EquipmentNotFoundException;
 import com.imat.oncomedica.inventory_management.domain.repository.EquipmentRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GetEquipmentByIdUseCase {
 
     private final EquipmentRepository equipmentRepository;
