@@ -1,7 +1,6 @@
 package com.imat.oncomedica.inventory_management.infrastructure.persistence.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.imat.oncomedica.inventory_management.domain.model.MaintenanceStaff;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +24,7 @@ public class MaintenanceEntity {
 
     @ManyToOne
     @JoinColumn(name = "staff_id")
-    private MaintenanceStaff maintenanceStaff;
+    private MaintenanceStaffEntity maintenanceStaff;
 
     private LocalDateTime scheduledDate;
 
