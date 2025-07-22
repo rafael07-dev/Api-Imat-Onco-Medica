@@ -3,8 +3,8 @@ package com.imat.oncomedica.inventory_management.infrastructure.config;
 import com.imat.oncomedica.inventory_management.application.mapper.MaintenanceMapper;
 import com.imat.oncomedica.inventory_management.application.usecase.maintenance.CompleteMaintenanceUseCase;
 import com.imat.oncomedica.inventory_management.domain.repository.MaintenanceRepository;
+import com.imat.oncomedica.inventory_management.domain.repository.OrderRepository;
 import com.imat.oncomedica.inventory_management.infrastructure.report.OrderPdfGenerator;
-import com.imat.oncomedica.inventory_management.infrastructure.repository.OrderRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
